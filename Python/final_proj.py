@@ -16,7 +16,7 @@ import csv
 
 
 #file path:
-# E:/OneDrive/Documents/School_Work/Clark/Map_Comparison/final_proj/contingency.csv
+# E:/OneDrive/Documents/School_Work/Clark/Map_Comparison/final_proj/PontiusMatrix/Data/contingency.csv
 
 my_path = input("Enter the file path: ")
 
@@ -32,4 +32,21 @@ contingency_table = np.loadtxt(open(my_path, "rb"),
 print(contingency_table)
 
 
-#find total size of exchange difference:
+#find sum of hits:
+total_hits = 0
+for i in range(0, ncols-1):
+    total_hits = total_hits + contingency_table[i,i]
+print(total_hits)
+    
+
+#find column sums
+column_totals = np.array([])
+for i in range(0, ncols-1):
+    column_totals = np.append(column_totals, np.sum(contingency_table[:,i]))
+print(column_totals)
+
+# find row totals:
+row_totals = np.array([])
+for i in range(0, ncols-1):
+    column_totals = np.append(row_totals, np.sum(contingency_table[i,:]))
+print(row_totals)
