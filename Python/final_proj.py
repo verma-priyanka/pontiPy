@@ -48,5 +48,21 @@ print(column_totals)
 # find row totals:
 row_totals = np.array([])
 for i in range(0, ncols-1):
-    column_totals = np.append(row_totals, np.sum(contingency_table[i,:]))
+    row_totals = np.append(row_totals, np.sum(contingency_table[i,:]))
 print(row_totals)
+
+# transpose of the matrix:
+contingency_table_transpose = contingency_table.transpose()
+
+# exchange for each category:
+size_of_exchange_difference = np.array([])
+for i in range(0, ncols-1):
+    current_exchange_category = np.array([])
+    for j in range(0, ncols-1):
+        #print(min(contingency_table[i,:][j], contingency_table[:,i][j]))
+        current_exchange_category = np.append(current_exchange_category, min(contingency_table[i,:][j], contingency_table[:,i][j]))
+        if j == ncols-2:
+            size_of_exchange_difference = np.append(size_of_exchange_difference, sum(current_exchange_category)-contingency_table[i,i])
+size_of_exchange_difference = size_of_exchange_difference * 2
+print(size_of_exchange_difference)
+    
