@@ -42,19 +42,19 @@ print(total_hits)
 #find column sums
 column_totals = np.array([])
 for i in range(0, ncols-1):
-    column_totals = np.append(column_totals, np.sum(contingency_table[:,i]))
+    column_totals = np.append(column_totals, sum(contingency_table[:,i]))
 print(column_totals)
 
 # find row totals:
 row_totals = np.array([])
 for i in range(0, ncols-1):
-    row_totals = np.append(row_totals, np.sum(contingency_table[i,:]))
+    row_totals = np.append(row_totals, sum(contingency_table[i,:]))
 print(row_totals)
 
 # transpose of the matrix:
 contingency_table_transpose = contingency_table.transpose()
 
-# exchange for each category:
+# exchange for each category (remember that it comes in pairs (Dek):
 size_of_exchange_difference = np.array([])
 for i in range(0, ncols-1):
     current_exchange_category = np.array([])
@@ -65,4 +65,50 @@ for i in range(0, ncols-1):
             size_of_exchange_difference = np.append(size_of_exchange_difference, sum(current_exchange_category)-contingency_table[i,i])
 size_of_exchange_difference = size_of_exchange_difference * 2
 print(size_of_exchange_difference)
+
+# false alarms for k:
+all_false_alarms = np.array([])
+for i in range(0, ncols-1):
+    all_false_alarms = np.append(all_false_alarms, sum(contingency_table[i,:]) - contingency_table[i,i])
+    
+# misses for k:
+all_misses = np.array([])
+for i in range(0, ncols-1):
+    all_misses = np.append(all_misses, sum(contingency_table[:,i]) - contingency_table[i,i])
+
+
+# Quantity difference/disagreement for k (Dqk):
+size_of_quantity_difference = abs(all_misses - all_false_alarms)
+
+# size of difference (false alarms + misses) for category k:
+size_of_difference = np.array([all_false_alarms + all_misses])
+
+# size of shift difference for k (Dsk):
+size_of_shift_difference = size_of_difference - size_of_quantity_difference - size_of_exchange_difference
+
+# sum of quantity, exchange, and shift
+qes_sum = size_of_quantity_difference + size_of_exchange_difference + size_of_shift_difference
+
+# false alarm quantity
+false_alarm_quantity = np.array([])
+for i in range(0, ncols-1):
+     false_alarm_quantity = np.append(false_alarm_quantity, max(0, all_false_alarms[i] - all_misses[i]))
+
+# miss quantity
+miss_quantity = np.array([])
+for i in range(0, ncols-1):
+     miss_quantity = np.append(miss_quantity, max(0, all_misses[i] - all_false_alarms[i]))
+
+
+
+
+
+
+
+
+
+
+
+
+
     
