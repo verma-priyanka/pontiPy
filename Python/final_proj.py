@@ -15,14 +15,14 @@ import numpy as np
 my_path = input("Enter the file path: ")
 
 # find the number of columns in csv
-with open(my_path) as f:
-    ncols = len(f.readline().split(',')) #comma delimited
+#with open(my_path) as f:
+#    ncols = len(f.readline().split(',')) #comma delimited
 
 # load in csv, skipping first row and column
-contingency_table_np = np.loadtxt(open(my_path, "rb"), 
-                               delimiter = ",", 
-                               skiprows = 1,
-                               usecols = range(1, ncols))
+#contingency_table_np = np.loadtxt(open(my_path, "rb"), 
+#                               delimiter = ",", 
+#                               skiprows = 1,
+#                               usecols = range(1, ncols))
 
 #contingency_table_pd = pd.read_csv(my_path, 
 #                                   sep=',',
@@ -81,9 +81,9 @@ def size_of_exchange_difference(data):
     for i in range(0, len(data)):
         current_exchange_category = np.zeros(shape=(1, len(data)))
         for j in range(0, len(data)):
-            current_exchange_category[0,j] = np.min((contingency_table_np[i,:][j], contingency_table_np[:,i][j]))
+            current_exchange_category[0,j] = np.min((data[i,:][j], data[:,i][j]))
             if j == len(data)-1:
-                size_of_exchange_difference_np[0,i] = np.sum(current_exchange_category)-contingency_table_np[i,i]
+                size_of_exchange_difference_np[0,i] = np.sum(current_exchange_category)-data[i,i]
     size_of_exchange_difference_np = size_of_exchange_difference_np * 2
     return(size_of_exchange_difference_np)
 
@@ -103,7 +103,7 @@ def size_of_exchange_difference(data):
 def false_alarms(data):
     all_false_alarms_np = np.zeros(shape=(1, len(data)))
     for i in range(0, len(data)):
-        all_false_alarms_np[0,i] =  sum(contingency_table_np[i,:]) - contingency_table_np[i,i]
+        all_false_alarms_np[0,i] =  sum(data[i,:]) - data[i,i]
     return(all_false_alarms_np)
     
 #def false_alarms(data):
@@ -116,7 +116,7 @@ def false_alarms(data):
 def misses(data):
     all_misses_np = np.zeros(shape=(1, len(data)))
     for i in range(0, len(data)):
-        all_misses_np[0,i] = sum(contingency_table_np[:,i]) - contingency_table_np[i,i]
+        all_misses_np[0,i] = sum(data[:,i]) - data[i,i]
     return(all_misses_np)
 
 #def misses(data):
