@@ -12,17 +12,21 @@ import numpy as np
 # E:/OneDrive/Documents/School_Work/Clark/Map_Comparison/final_proj/PontiusMatrix/Data/contingency.csv
 # D:/OneDrive/Documents/School_Work/Clark/Map_Comparison/final_proj/PontiusMatrix/Data/contingency.csv
 
+#specify whether 
+
+
+
 my_path = input("Enter the file path: ")
 
 # find the number of columns in csv
-#with open(my_path) as f:
-#    ncols = len(f.readline().split(',')) #comma delimited
+with open(my_path) as f:
+    ncols = len(f.readline().split(',')) #comma delimited
 
 # load in csv, skipping first row and column
-#contingency_table_np = np.loadtxt(open(my_path, "rb"), 
-#                               delimiter = ",", 
-#                               skiprows = 1,
-#                               usecols = range(1, ncols))
+contingency_table_np = np.loadtxt(open(my_path, "rb"), 
+                               delimiter = ",", 
+                               skiprows = 1,
+                               usecols = range(1, ncols))
 
 #contingency_table_pd = pd.read_csv(my_path, 
 #                                   sep=',',
@@ -30,7 +34,7 @@ my_path = input("Enter the file path: ")
 #                                   index_col = 0) #specify rownames
 
 #find sum of hits:
-def total_hits(data):
+def sum_of_hits(data):
     total_hits_np = 0
     for i in range(0, len(data)):
         total_hits_np = total_hits_np + data[i,i]
@@ -131,12 +135,7 @@ def size_of_quantity_difference(data):
     size_of_quantity_difference_np = abs(misses(data) - false_alarms(data))
     return(size_of_quantity_difference_np)
 
-
-#def size_of_quantity_difference(data):
-#    return(abs(misses(data) - false_alarms(data)))
-
-
-# size of difference (false alarms + misses) for category k:
+# size of difference (false alarms + misses) for category k (total disagreement):
 def size_of_difference(data):
     size_of_difference_np = false_alarms(data) + misses(data)
     return(size_of_difference_np)
@@ -145,6 +144,7 @@ def size_of_difference(data):
 def size_of_shift_difference(data):
     size_of_shift_difference_np = size_of_difference(data) - size_of_quantity_difference(data) - size_of_exchange_difference(data)
     return(size_of_shift_difference_np)
+    
 # sum of quantity, exchange, and shift
 def qes(data):
     qes_sum_np = size_of_quantity_difference(data) + size_of_exchange_difference(data) + size_of_shift_difference(data)
@@ -165,17 +165,47 @@ def miss_quantity(data):
     return(miss_quantity_np)
 
 
+# miss exchange
 
-#create Size dataframe:
-#categories_np = np.array([range(0, ncols-1)])
-
-
+# false alarm exchange
 
 
+# extent of contingency table (total pixel count)
+def extent(data):
+    return(np.sum(data))
 
 
+# allocation disagreement
+#def allocation_disagreement(data):
+#    return((sum_of_misses(data) - sum_of_false_alarms(data)) - abs(sum_of_misses(data) - sum_of_false_alarms(data)))
 
+# sum of correct rejections
+def correct_rejections(data):
+    if len(data) > 2:
+        print("You may only have 2 categories (presence and absence) for this metric.")
+    else:
+        return(extent(data) - data[0,0] - data[0,1] - data[1,0])
 
+       
+# sensitivity
+def sensitivity(data):
+    if len(data) == 2:
+        return(data[0,0] / (data[0,0] + data[1,0]))
+    else:
+        print("You may only have 2 categories (presence and absence) for this metric.")
 
+# specificity:
+def specificity(data):
+    if len(data) > 2:
+        print("You may only have 2 categories (presence and absence) for this metric.")
+    else:
+        correct_rejections(data) / (correct_rejections(data) + data[1,0])
+
+#
+#def sample_to_population(data, transformation = np.vstack(np.full((1, len(data)), 1))):
+#    if np.shape(transformation) == (1, len(data)):
+#        return(data * transformation)
+#    else:
+#        print("The tranformation array provided has incorrect dimensions.")
 
     
