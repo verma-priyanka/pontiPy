@@ -201,11 +201,11 @@ def specificity(data):
     else:
         correct_rejections(data) / (correct_rejections(data) + data[1,0])
 
-#
-#def sample_to_population(data, transformation = np.vstack(np.full((1, len(data)), 1))):
-#    if np.shape(transformation) == (1, len(data)):
-#        return(data * transformation)
-#    else:
-#        print("The tranformation array provided has incorrect dimensions.")
 
-    
+def sample_to_population(data, transformation = 1):
+    if np.shape(transformation) == (len(data), 1) or type(transformation) == int:
+        return(data * transformation)
+    else:
+        print("The tranformation array provided has incorrect dimensions.")
+
+
