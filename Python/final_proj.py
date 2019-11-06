@@ -61,7 +61,7 @@ def correct_rejections(data):
     if len(data) > 2:
         print("You may only have 2 categories (presence and absence) for this metric.")
     else:
-        return(data[1,1)
+        return(data[1,1])
         
 # false alarms for k:
 def false_alarms(data):
@@ -76,7 +76,7 @@ def false_alarms(data):
 # sensitivity
 def sensitivity(data):
     if len(data) == 2:
-        return(data[0,0] / (data[0,0] + data[1,0]))
+        return(hits(data) / (hits(data) + misses(data)))
     else:
         print("You may only have 2 categories (presence and absence) for this metric.")
 
@@ -85,7 +85,7 @@ def specificity(data):
     if len(data) > 2:
         print("You may only have 2 categories (presence and absence) for this metric.")
     else:
-        correct_rejections(data) / (correct_rejections(data) + data[1,0])
+        correct_rejections(data) / (correct_rejections(data) + false_alarms(data))
 
 
 def sample_to_population(data, transformation = 1):
@@ -141,15 +141,13 @@ def size_of_difference(data):
     size_of_difference_np = false_alarms(data) + misses(data)
     return(size_of_difference_np)
 
-# size of shift difference for k (Dsk):
+# size of shift difference for k (Dsk), (shift):
 def size_of_shift_difference(data):
-    size_of_shift_difference_np = size_of_difference(data) - size_of_quantity_difference(data) - size_of_exchange_difference(data)
-    return(size_of_shift_difference_np)
-    
-# sum of quantity, exchange, and shift
-def qes(data):
-    qes_sum_np = size_of_quantity_difference(data) + size_of_exchange_difference(data) + size_of_shift_difference(data)
-    return(qes_sum_np)
+    if len(data > 2):
+        size_of_shift_difference_np = size_of_difference(data) - size_of_quantity_difference(data) - size_of_exchange_difference(data)
+        return(size_of_shift_difference_np)
+    else:
+        print("You must have more than presence and absence categories for this metric.")
     
 # false alarm quantity
 def false_alarm_quantity(data):
@@ -165,13 +163,34 @@ def miss_quantity(data):
         miss_quantity_np[0,i] = np.max((0, (misses(data)[0,i] - false_alarms(data)[0, i])))
     return(miss_quantity_np)
 
+# total quantity
+def quantity(data):
+    total_quantity = np.zeros(shape = (1, len(data)))
+    for i in range(0,len(data)):
+        if miss_quantity(data)[0,i] != false_alarm_quantity(data)[0,i]:
+            total_quantity[0,i] = max(miss_quantity(data)[0,i], false_alarm_quantity(data)[0,i])
+        else:
+            total_quantity[0,i] = 0
+    return(total_quantity)
+    
 
 # miss exchange
+def miss_exchange(data):
+    exchange = np.zeros(shape=(1, len(data)))
+    for i in range(0, len(data)):
+        current_exchange_category = np.zeros(shape=(1, len(data)))
+        for j in range(0, len(data)):
+            current_exchange_category[0,j] = np.min((data[i,:][j], data[:,i][j]))
+            if j == len(data)-1:
+                exchange[0,i] = np.sum(current_exchange_category)-data[i,i]
+    return(exchange)
+
+
+
+
 
 # false alarm exchange
-
-
-
+        
 
 
 # allocation disagreement
