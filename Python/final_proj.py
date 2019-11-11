@@ -25,6 +25,8 @@ contingency_table_np = np.loadtxt(open(my_path, "rb"),
                                skiprows = 1,
                                usecols = range(1, ncols))
 
+
+
 #find sum of hits:
 #def sum_of_hits(data):
 #    total_hits_np = 0
@@ -37,12 +39,12 @@ def extent(data):
     return(np.sum(data))
 
 # misses (binary or k):
-def misses(data, par1=None):
+def misses(data, par1='ALL'):
     if len(data) > 2:
         all_misses_np = np.zeros(shape=(1, len(data)))
         for i in range(0, len(data)):
             all_misses_np[0,i] = sum(data[:,i]) - data[i,i]
-        if type(par1) == type(None):
+        if par1 == 'ALL':
             return(all_misses_np)
         else:
             return(all_misses_np)[0, par1]
@@ -50,12 +52,12 @@ def misses(data, par1=None):
         return(data[1,0])
 
 # hits (binary or k):
-def hits(data, par1=None):
+def hits(data, par1='ALL'):
     if len(data) > 2:
         all_hits_np = np.zeros(shape=(1, len(data)))
         for i in range(0, len(data)):
             all_hits_np[0,i] = data[i,i]
-        if type(par1) == type(None):
+        if par1 == 'ALL':
             return(all_hits_np)
         else:
             return(all_hits_np[0, par1])
@@ -71,12 +73,12 @@ def correct_rejections(data):
         return(data[1,1])
         
 # false alarms for k:
-def false_alarms(data, par1=None):
+def false_alarms(data, par1='ALL'):
     if len(data) > 2:
         all_false_alarms_np = np.zeros(shape=(1, len(data)))
         for i in range(0, len(data)):
             all_false_alarms_np[0,i] =  sum(data[i,:]) - data[i,i]
-        if type(par1) == type(None):
+        if par1 == 'ALL':
             return(all_false_alarms_np)
         else:
             return(all_false_alarms_np[0, par1])
@@ -130,7 +132,7 @@ def transpose(data):
     return(contingency_table_transpose_np)
 
 
-# exchange for each category (remember that it comes in pairs (Dek):
+# total exchange for each category (remember that it comes in pairs (Dek):
 def size_of_exchange_difference(data):
     size_of_exchange_difference_np = np.zeros(shape=(1, len(data)))
     for i in range(0, len(data)):
@@ -192,16 +194,96 @@ def quantity(data):
     return(total_quantity)
     
 
-# miss exchange
-def miss_exchange(data):
-    exchange = np.zeros(shape=(1, len(data)))
-    for i in range(0, len(data)):
-        current_exchange_category = np.zeros(shape=(1, len(data)))
-        for j in range(0, len(data)):
-            current_exchange_category[0,j] = np.min((data[i,:][j], data[:,i][j]))
-            if j == len(data)-1:
-                exchange[0,i] = np.sum(current_exchange_category)-data[i,i]
-    return(exchange)
+## miss exchange
+#def miss_exchange(data, par1 = 'ALL', par2 = 'ALL'):
+#    exchange = np.zeros(shape=(1, len(data)))
+#    if par1 == "ALL":
+#        for i in range(0, len(data)):
+#            current_exchange_category = np.zeros(shape=(1, len(data)))
+#            for j in range(0, len(data)):
+#                current_exchange_category[0,j] = np.min((data[i,:][j], data[:,i][j]))
+#                if j == len(data)-1:
+#                    exchange[0,i] = np.sum(current_exchange_category)-data[i,i]
+#        return(exchange)
+#    elif type(par1) == int:
+#        current_exchange_category = np.zeros(shape=(1, len(data)))
+#        for j in range(0, len(data)):
+#            if j == len(data)-1:
+#                current_exchange_category[0,j] = np.min((data[par1,:][j], data[:,par1][j]))
+##    
+def convert_to_pandas(my_array):
+    x = pd.DataFrame(data = np.int_(my_array[0:, 0:]),
+                 index = range(0, len(my_array)),
+                 columns = range(0, len(my_array)))
+    return(x)
+        
+
+##df_transpose = df.transpose()
+#def exchange(my_np_array, category1 = 'ALL',category2 = 'ALL'):
+#    dataframe = convert_to_pandas(my_np_array)
+#    _exchange = {}
+#    _categories = range(len(dataframe)-1)
+#    for i in _categories:
+#        # Create a list for every category
+#        _catlist = []
+#        for j in _categories:
+#            if i != j:
+#                # Create list with each exchange value for category 1
+#                _catlist.append(min(dataframe.transpose().iloc[i][j],dataframe.transpose().iloc[j][i]))
+#        # Append exchange list for each category to dictionary
+#        _exchange[i]=_catlist
+#        # print('Exchange for Category',i,": ",_catlist)
+#    # A condensed list of category and exchange sum for each
+#    ex_by_category = ({k: sum(v) for k, v in _exchange.items()})
+#    if category1 == 'ALL':
+#        # Total exchange. Should this be divided by 2?
+#        return sum(ex_by_category.values())
+#    # If one category is specified
+#    # Return is exchange with all categories
+#    elif category1 != 'ALL' and category2 == 'ALL':
+#        # Dictionary to return exchanges between cat 1 and all other categories
+#        # Also returns a total exchange for category
+#        _single_category= {}
+#        # iterate through number of categories
+#        for i in range(len(_exchange[category1])):
+#            # Exchange at index 0 = exchange of 0 with category 1 since exchange cannot happen with itself
+#            # Size of list with exchange is # of categories - 1
+#            # If index of list item == category 1, the exchange is for the category after
+#            # Example: Parameter is Category 2
+#            # Exchange for Category 2: {'Category 0': 0, 'Category 1': 30, 'Category 3': 40, 'Total Exchange': 70}
+#            if i != category1:
+#                # key for dictionary
+#                _cat_key = 'Category ' + str(i)
+#                # If i == category, the else statement added that category to dict
+#                # So this addition will be i+1
+#                if _cat_key in _single_category.keys():
+#                    _cat_key = 'Category ' + str(i + 1)
+#                    _single_category[_cat_key] = _exchange[category1][i]
+#                # if category i not in dictionary, add to dictionary
+#                else:
+#                    _single_category[_cat_key] = _exchange[category1][i]
+#            # Exchange at index 0 = exchange of 0 with category 1
+#            # When index == category1 parameter, the key will be incremented by 1
+#            # Category 1 Exchange with Category 0 = index 0 in list
+#            else:
+#                _cat_key = 'Category ' + str(i+1)
+#                _single_category[_cat_key] = _exchange[category1][i]
+#        _single_category['Total Exchange'] = sum(_single_category.values())
+#        return _single_category
+#    else:
+#        # Exchange is with the inverse cell position for the two categories
+#        return min(_exchange[category1][category2],_exchange[category2][category1])
+
+#print("Exchange for Category 2:",exchange(dataframe.transpose().index,2))
+
+
+
+# ------------------------------------------------------------------------------
+# This function will call all the previous functions
+# This will generate the final output contingency table Prissskilla designs
+def contingency_table(dataframe):
+    dataframe.loc["False Alarm"] = false_alarm(dataframe.index)
+    return dataframe
 
 
 # miss shift
@@ -213,5 +295,55 @@ def miss_exchange(data):
 # allocation disagreement
 #def allocation_disagreement(data):
 #    return((sum_of_misses(data) - sum_of_false_alarms(data)) - abs(sum_of_misses(data) - sum_of_false_alarms(data)))
+
+
+
+
+
+
+
+
+import rasterio
+import rasterio.plot
+import pyproj
+import matplotlib
+import matplotlib.pyplot as plt
+x = "D:/OneDrive/Documents/School_Work/Clark/Map_Comparison/hw1/map_comparison_hw1/1971Landcover01_bool.rst"
+y = "D:/OneDrive/Documents/School_Work/Clark/Map_Comparison/hw1/map_comparison_hw1/1985Landcover01_bool.rst"
+#print file metadata
+with rasterio.open(x) as src1:
+    print(src1.profile)
+
+#access and plot values as numpy array
+with rasterio.open(x) as src1:
+     my_raster_array1 = src1.read(1, out_shape=(1, int(src1.height), int(src1.width)))
+     print(my_raster_array1)
+plt.imshow(my_raster_array1)
+plt.colorbar()
+plt.title("1971")
+plt.xlabel("Column #")
+plt.ylabel("Row #")
+         
+           
+with rasterio.open(y) as src2:
+    print(src2.profile)
+
+#access and plot values as numpy array
+with rasterio.open(y) as src2:
+     my_raster_array2 = src2.read(1, out_shape=(1, int(src2.height), int(src2.width)))
+     print(my_raster_array2)
+plt.imshow(my_raster_array2)
+plt.colorbar()
+plt.title("1985")
+plt.xlabel("Column #")
+plt.ylabel("Row #")
+         
+from sklearn.metrics import confusion_matrix
+my_raster_vec1 = np.reshape(my_raster_array1, my_raster_array1.size)
+my_raster_vec2 = np.reshape(my_raster_array2, my_raster_array2.size)
+
+confusion_matrix(my_raster_vec1, my_raster_vec2)
+
+
 
 
