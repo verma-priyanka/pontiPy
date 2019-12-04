@@ -2,26 +2,72 @@
 Python Library to automate the creation and analysis of PonitusMatrix.
 
 # Usage
+pd_table_func = testpontipy2(df)
+
+## contingency_table()
+Display inputted Contingency Table using: 
+display(pd_table_func.contingency_table())
+
+### Arguments
+
+
+
+## size() 
+### Arguments
+
+
+
+## difference()
+### Arguments
+
+
 
 ## Hits
 ### Arguments
 
+
+
+
 ## Miss
 ### Arguments
 
-## False Alarms
+
+
+
+
+## false
 ### Arguments
 
 
 
-# Available Metrics
+## Quantity
+### Arguments
+
+
+## Exchange
+###Arguments
+
+
+## Shift
+### Arguments
 
 
 
 
 
 
-# Created to support the use of Pontius developed methods
+
+
+
+
+# Available Metrics for further computations
+
+
+
+
+
+
+# Acknowledgements
 
 Dr. Robert Gilmore Pontius Jr created the first version of this workbook in 2001. Pontius has revised this workbook several times, and each revision has a larger number for the suffix of the filename. Pontius created version 42 in 2019.
 
