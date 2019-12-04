@@ -6,8 +6,8 @@ pd_table_func = testpontipy2(df)
 
 # Functions
 ## contingency_table()
-### Arguments
-### Example
+#### Arguments
+#### Example
 display(pd_table_func.contingency_table())
 
 ## size() 
