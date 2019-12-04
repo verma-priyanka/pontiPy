@@ -18,14 +18,14 @@ Category k specified = Size of category k
   c) No Axis specified = Size of category k  
 ### Example
 a)  
-input:  print('Size of Extent:', pd_table_func.size(), 'Hectares')  
-output: Size of Extent: 25662 Hectares
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input:  print('Size of Extent:', pd_table_func.size(), 'Hectares')  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: Size of Extent: 25662 Hectares  
 b)  
-input:  print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
-output: Size of Category 1 in X: 2296 Hectares  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input:  print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: Size of Category 1 in X: 2296 Hectares  
 c)  
-input:  print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')  
-output: Size of Category 1 in Y: 2144 Hectares  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input:  print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: Size of Category 1 in Y: 2144 Hectares  
 
 
 
