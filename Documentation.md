@@ -10,12 +10,15 @@ display(pd_table_func.contingency_table())
 
 
 ## size() 
+Function to Compute Size for all or one Category k  
+Axis must be specified when category k is specified  
+Determines if row or column sum for category k will be returned  
 ### Arguments
 No category specified = Size of extent  
 Category k specified = Size of category k  
-  a) Axis 'X' = Size of category k in X (row sum)  
-  b) Axis 'Y' = Size of category k in Y (col sum)  
-  c) No Axis specified = Size of category k  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a) Axis 'X' = Size of category k in X (row sum)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) Axis 'Y' = Size of category k in Y (col sum)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c) No Axis specified = Size of category k  
 ### Example
 a)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input:  print('Size of Extent:', pd_table_func.size(), 'Hectares')  
@@ -28,16 +31,29 @@ c)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output: Size of Category 1 in Y: 2144 Hectares  
 
 
-
-
 ## difference()
+Function to compute difference for all or one category
 ### Arguments
-
+No category specified = Total Size - Hits  
+Category K specified = Size-*(2*Hits) For That Category  
+### Example
 
 
 ## Hits
+Functions to compute Hits, Misses, and False Alarms
 ### Arguments
+No Category specified = Sum of Total Hits, Misses, or False Alarms  
+Category k specified = Hits, Misses, or False Alarms for Category k
+### Example
+inputs:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Total Hits:', pd_table_func.hits(), 'Hectares')  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Total Misses:', pd_table_func.miss(), 'Hectares')  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')  
 
+outputs:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Hits: 3553 Hectares  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Misses: 8735 Hectares  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Total False Alarms: 8735 Hectares  
 
 
 
