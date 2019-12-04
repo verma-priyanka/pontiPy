@@ -14,13 +14,13 @@ display(pd_table_func.contingency_table())
 - Function to Compute Size for all or one Category k  
 - Axis must be specified when category k is specified  
 - Determines if row or column sum for category k will be returned  
-### Arguments
+#### Arguments
 - No category specified = Size of extent  
 - Category k specified = Size of category k  
 a) Axis 'X' = Size of category k in X (row sum)  
 b) Axis 'Y' = Size of category k in Y (col sum)  
 c) No Axis specified = Size of category k  
-### Example
+#### Example
 - print('Size of Extent:', pd_table_func.size(), 'Hectares')  
   output: Size of Extent: 25662 Hectares  
 - input:  print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
@@ -31,18 +31,18 @@ c) No Axis specified = Size of category k
 
 ## difference()
 - Function to compute difference for all or one category
-### Arguments
+#### Arguments
 - No category specified = Total Size - Hits  
 - Category K specified = Size-*(2*Hits) For That Category  
-### Example
+#### Example
 
 
-## Hits
+## hits(), miss(), false_alarm()
 - Functions to compute Hits, Misses, and False Alarms
-### Arguments
+#### Arguments
 - No Category specified = Sum of Total Hits, Misses, or False Alarms  
 - Category k specified = Hits, Misses, or False Alarms for Category k
-### Example
+#### Example
 - inputs:  
 print('Total Hits:', pd_table_func.hits(), 'Hectares')  
 print('Total Misses:', pd_table_func.miss(), 'Hectares')  
@@ -55,28 +55,20 @@ The Total False Alarms: 8735 Hectares
 
 
 
-## Miss
-### Arguments
 
 
 
 
-
-## false
-### Arguments
-
+## quantity()
+#### Arguments
 
 
-## Quantity
-### Arguments
+## exchange
+#### Arguments
 
 
-## Exchange
-###Arguments
-
-
-## Shift
-### Arguments
+## shift()
+#### Arguments
 
 
 
