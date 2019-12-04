@@ -1,12 +1,27 @@
-## What is it?
+# Description
+Python Library to automate the creation and analysis of PonitusMatrix.
+
+# Usage
+
+## Hits
+### Arguments
+
+## Miss
+### Arguments
+
+## False Alarms
+### Arguments
 
 
-## What does it do?
 
-## Available Metrics
+# Available Metrics
 
 
-## Created to enhance the use of Pontius methods 
+
+
+
+
+# Created to support the use of Pontius developed methods
 
 Dr. Robert Gilmore Pontius Jr created the first version of this workbook in 2001. Pontius has revised this workbook several times, and each revision has a larger number for the suffix of the filename. Pontius created version 42 in 2019.
 
