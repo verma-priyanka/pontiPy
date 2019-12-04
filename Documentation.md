@@ -5,15 +5,28 @@ Python Library to automate the creation and analysis of PonitusMatrix.
 pd_table_func = testpontipy2(df)
 
 ## contingency_table()
-Display inputted Contingency Table using: 
-display(pd_table_func.contingency_table())
-
 ### Arguments
-
+display(pd_table_func.contingency_table())
 
 
 ## size() 
 ### Arguments
+No category specified = Size of extent
+Category k specified = Size of category k
+  a) Axis 'X' = Size of category k in X (row sum)
+  b) Axis 'Y' = Size of category k in Y (col sum)
+  c) No Axis specified = Size of category k
+### Example
+a)
+input:  print('Size of Extent:', pd_table_func.size(), 'Hectares')
+output: Size of Extent: 25662 Hectares
+b)
+input:  print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')
+output: Size of Category 1 in X: 2296 Hectares
+c)
+input:  print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
+output: Size of Category 1 in Y: 2144 Hectares
+
 
 
 
