@@ -2,13 +2,17 @@
 Python Library to automate the creation and analysis of PonitusMatrix.
 
 # Usage
+```python
 pd_table_func = testpontipy2(df)
+```
 
 # Functions
 ## contingency_table()
 #### Arguments
 #### Example
+```python
 display(pd_table_func.contingency_table())
+```
 
 ## size() 
 - Function to Compute Size for all or one Category k  
@@ -34,7 +38,7 @@ print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')
 ```python
 print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
 ```
->> _output: Size of Category 1 in Y: 2144 Hectares_  
+>> _Size of Category 1 in Y: 2144 Hectares_  
 
 
 ## difference()
@@ -67,11 +71,6 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 >> _The Total False Alarms: 8735 Hectares_  
 
 
-
-
-
-
-
 ## quantity()
 #### Arguments
 
@@ -101,13 +100,13 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 
 # Acknowledgements
 
-Dr. Robert Gilmore Pontius Jr created the first version of this workbook in 2001. Pontius has revised this workbook several times, and each revision has a larger number for the suffix of the filename. Pontius created version 42 in 2019.
+_Dr. Robert Gilmore Pontius Jr created the first version of this workbook in 2001. Pontius has revised this workbook several times, and each revision has a larger number for the suffix of the filename. Pontius created version 42 in 2019.
 
-Visit www.clarku.edu/~rpontius for publications on this workbook's methods. Specificaly, see:
+_Visit www.clarku.edu/~rpontius for publications on this workbook's methods. Specificaly, see:
 Pontius Jr, Robert Gilmore and Ali Santacruz. 2014. Quantity, Exchange and Shift Components of Differences in a Square Contingency Table. International Journal of Remote Sensing 35(21): 7543-7554.
 
-Pontius Jr, Robert Gilmore. 2019. Component intensities to relate difference by category with difference overall. International Journal of Applied Earth Observations and Geoinformation 77: 94-99.
+_Pontius Jr, Robert Gilmore. 2019. Component intensities to relate difference by category with difference overall. International Journal of Applied Earth Observations and Geoinformation 77: 94-99.
 
-Pontius Jr, Robert Gilmore and Marco Millones. 2011. Death to Kappa: birth of quantity disagreement and allocation disagreement for accuracy assessment. International Journal of Remote Sensing 32(15): 4407-4429. 
+_Pontius Jr, Robert Gilmore and Marco Millones. 2011. Death to Kappa: birth of quantity disagreement and allocation disagreement for accuracy assessment. International Journal of Remote Sensing 32(15): 4407-4429. 
 
-Aldwaik, Safaa Zakaria, Jeffrey A Onsted, and Robert Gilmore Pontius Jr. 2015. Behavior-based aggregation of land categories for temporal change analysis. International Journal of Applied Earth Observation and Geoinformation 35(Part B): 229-238.
+_Aldwaik, Safaa Zakaria, Jeffrey A Onsted, and Robert Gilmore Pontius Jr. 2015. Behavior-based aggregation of land categories for temporal change analysis. International Journal of Applied Earth Observation and Geoinformation 35(Part B): 229-238._
