@@ -132,10 +132,10 @@ Return exchange between 2 categories
 
 
 # Further Information & Contact
-- Library Information:  
+- **Library Information:**  
 Priyanka Verma, prverma@clarku.edu    
 
-- Metric Methodolgy:  
+- **Metric Methodolgy:**  
 Robert (Gil) Pontius, rpontius@clarku.edu  
 See Metrics that Make a Difference, Chapter 4  
 Link to Chapter 4
