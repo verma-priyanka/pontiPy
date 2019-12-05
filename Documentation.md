@@ -44,14 +44,19 @@ c) No Axis specified = Size of category k
 - Category k specified = Hits, Misses, or False Alarms for Category k
 #### Example
 - inputs:  
+```python
 print('Total Hits:', pd_table_func.hits(), 'Hectares')  
+```
+```python
 print('Total Misses:', pd_table_func.miss(), 'Hectares')  
+```
+```python
 print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')  
-
+```
 - outputs:  
-Total Hits: 3553 Hectares  
+_Total Hits: 3553 Hectares
 Total Misses: 8735 Hectares  
-The Total False Alarms: 8735 Hectares  
+The Total False Alarms: 8735 Hectares_ 
 
 
 
