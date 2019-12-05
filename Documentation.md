@@ -21,12 +21,20 @@ a) Axis 'X' = Size of category k in X (row sum)
 b) Axis 'Y' = Size of category k in Y (col sum)  
 c) No Axis specified = Size of category k  
 #### Example
-- print('Size of Extent:', pd_table_func.size(), 'Hectares')  
-  output: Size of Extent: 25662 Hectares  
-- input:  print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
-  output: Size of Category 1 in X: 2296 Hectares  
-- input:  print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')  
-  output: Size of Category 1 in Y: 2144 Hectares  
+```python
+print('Size of Extent:', pd_table_func.size(), 'Hectares') 
+```
+>> _Size of Extent: 25662 Hectares_  
+
+```python
+print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
+```
+>> _Size of Category 1 in X: 2296 Hectares_  
+
+```python
+print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
+```
+>> _output: Size of Category 1 in Y: 2144 Hectares_  
 
 
 ## difference()
