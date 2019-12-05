@@ -101,9 +101,9 @@ No Category Specified = Total Quantity
 
 Category Specified:  
 - Quantity is returned with labels: 
->> If value > 0 = Miss Quantity
->> If value > 1 = False Alarm Quantity
->> If value = 0, then Quantity is 0
+If value > 0 = Miss Quantity  
+If value > 1 = False Alarm Quantity  
+If value = 0, then Quantity is 0  
 
 
 ## exchange    
