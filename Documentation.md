@@ -97,9 +97,9 @@ Function to compute quantity between all or one category
 Returns as a dictionary  
 
 #### Arguments  
-**No Category Specified = Total Quantity**   
+**No Category Specified** = Total Quantity   
 
-**Category Specified:**  
+**Category k Specified:**  
 - Quantity is returned with labels:  
 If value > 0 = Miss Quantity  
 If value > 1 = False Alarm Quantity  
@@ -107,15 +107,15 @@ If value = 0, then Quantity is 0
 
 
 ## exchange    
-Function to compute Exchange between ALL, ONE or TWO categories  
-- 1. If no category is specified (Total must be false):  
->> Sum of total exchange is returned  
-- 2. If total is False and 1 category is specified:  
->> Return is exchange for that category with all other categories + a total value in dict  
-- 3. If Total is True and 1 category is specified:  
->> Return is total exchange for that category  
-- 4. If 2 categories are specified (Total must be false):  
->> Return exchange between 2 categories  
+Function to compute Exchange between ALL, ONE or TWO categories    
+- **No Category Specified** = (Total must be false):    
+Sum of total exchange is returned   
+- **If total is False and 1 category is specified:**  
+Return is exchange for that category with all other categories + a total value in dict   
+- **If Total is True and 1 category is specified:**   
+Return is total exchange for that category  
+- **If 2 categories are specified (Total must be false):**  
+Return exchange between 2 categories  
 #### Arguments
 
 
