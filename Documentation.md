@@ -99,13 +99,13 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 ## exchange    
 Function to compute Exchange between ALL, ONE or TWO categories  
 - 1. If no category is specified (Total must be false):  
-- Sum of total exchange is returned  
+>> Sum of total exchange is returned  
 - 2. If total is False and 1 category is specified:  
-- Return is exchange for that category with all other categories + a total value in dict  
+>> Return is exchange for that category with all other categories + a total value in dict  
 - 3. If Total is True and 1 category is specified:  
-- Return is total exchange for that category  
+>> Return is total exchange for that category  
 - 4. If 2 categories are specified (Total must be false):  
-- Return exchange between 2 categories  
+>> Return exchange between 2 categories  
 #### Arguments
 
 
