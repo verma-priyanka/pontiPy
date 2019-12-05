@@ -132,7 +132,7 @@ Return exchange between 2 categories
 
 
 # Further Information & Contact
-Library Information: Priyanka Verma, prverma@clarku.edu  
+- Library Information: Priyanka Verma, prverma@clarku.edu   
 
 - Accuracy Assessment Methodolgy:  
 Robert (Gil) Pontius, rpontius@clarku.edu  
