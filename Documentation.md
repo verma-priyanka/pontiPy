@@ -1,7 +1,12 @@
 # Description
 Python Library to automate the creation and analysis of PonitusMatrix.
 
-# Usage
+# Dependencies & Usage
+```python
+import numpy as np
+import pandas as pd
+```
+
 ```python
 pd_table_func = testpontipy2(df)
 ```
@@ -10,6 +15,10 @@ pd_table_func = testpontipy2(df)
 ## contingency_table()
 #### Arguments
 #### Example
+```python
+df = pd.read_csv('sample.csv', index_col= 0)
+display(df)
+```
 ```python
 display(pd_table_func.contingency_table())
 ```
@@ -91,12 +100,9 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 
 
 
-# Available Metrics for further computations
-
-
-
-
-
+# Available Metrics
+See Metrics that Make a Difference, Chapter 4
+Link to Chapter 4
 
 # Acknowledgements
 
