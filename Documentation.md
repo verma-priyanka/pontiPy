@@ -12,6 +12,7 @@ pd_table_func = testpontipy2(df)
 ```
 
 # Functions
+Available functions in library
 ## contingency_table()
 #### Arguments
 #### Example
