@@ -19,9 +19,15 @@ pd_table_func = testpontipy2(df)
 df = pd.read_csv('sample.csv', index_col= 0)
 display(df)
 ```
+![image](images/preCSV.PNG "Dataframe")
+
+
 ```python
 display(pd_table_func.contingency_table())
 ```
+![image](images/postCSV.PNG "Contingency Table")
+
+
 
 ## size() 
 - Function to Compute Size for all or one Category k  
