@@ -97,10 +97,10 @@ Function to compute quantity between all or one category
 Returns as a dictionary  
 
 #### Arguments  
-No Category Specified = Total Quantity  
+No Category Specified = Total Quantity   
 
 Category Specified:  
-- Quantity is returned with labels: 
+- Quantity is returned with labels:  
 If value > 0 = Miss Quantity  
 If value > 1 = False Alarm Quantity  
 If value = 0, then Quantity is 0  
