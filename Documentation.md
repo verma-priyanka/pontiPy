@@ -40,8 +40,8 @@ display(pd_table_func.contingency_table())
 - Axis must be specified when category k is specified  
 - Determines if row or column sum for category k will be returned  
 #### Arguments
-- No category specified = Size of extent  
-- Category k specified = Size of category k  
+- **No category specified** = Size of extent  
+- **Category k specified** = Size of category k  
 a) Axis 'X' = Size of category k in X (row sum)  
 b) Axis 'Y' = Size of category k in Y (col sum)  
 c) No Axis specified = Size of category k  
@@ -65,16 +65,16 @@ print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
 ## difference()  
 - Function to compute difference for all or one category
 #### Arguments
-- No category specified = Total Size - Hits  
-- Category K specified = Size-*(2*Hits) For That Category  
+- **No category specified** = Total Size - Hits  
+- **Category K specified** = Size-*(2*Hits) For That Category  
 #### Example
 
 
 ## hits(), miss(), false_alarm()
 - Functions to compute Hits, Misses, and False Alarms
 #### Arguments
-- No Category specified = Sum of Total Hits, Misses, or False Alarms  
-- Category k specified = Hits, Misses, or False Alarms for Category k
+- **No Category specified** = Sum of Total Hits, Misses, or False Alarms  
+- **Category k specified** = Hits, Misses, or False Alarms for Category k
 #### Example
 ```python
 print('Total Hits:', pd_table_func.hits(), 'Hectares')  
@@ -97,9 +97,9 @@ Function to compute quantity between all or one category
 Returns as a dictionary  
 
 #### Arguments  
-No Category Specified = Total Quantity   
+**No Category Specified = Total Quantity**   
 
-Category Specified:  
+**Category Specified:**  
 - Quantity is returned with labels:  
 If value > 0 = Miss Quantity  
 If value > 1 = False Alarm Quantity  
