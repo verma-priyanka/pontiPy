@@ -131,8 +131,12 @@ Return exchange between 2 categories
 
 
 
-# Available Metrics
-See Metrics that Make a Difference, Chapter 4
+# Further Information & Contact
+Library Information: Priyanka Verma, prverma@clarku.edu  
+
+- Accuracy Assessment Methodolgy:  
+Robert (Gil) Pontius, rpontius@clarku.edu  
+See Metrics that Make a Difference, Chapter 4  
 Link to Chapter 4
 
 # Acknowledgements
