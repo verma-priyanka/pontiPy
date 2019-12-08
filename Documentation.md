@@ -21,14 +21,13 @@ NewDataFrame = testpontipy2(initialDataFrame)
 ![image](images/preCSV.PNG "Dataframe")
 
 # Functions  
-Available functions in library  
+Available functions in pontiPy Library  
 ## Contingency Table  
 - Displays inputted matrix  
 - Generates PontiusMatrix Contingency Table  
 This will generate the final output contingency table  
 #### Arguments  
 - **Generates Initial Contingency Table** = contingency_table()  
-  
 #### Examples  
 - Displaying the sample data through the contingency table function
 ```python
