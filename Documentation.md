@@ -178,13 +178,14 @@ Total Shift Disagreement
 Equation = [sum of shift(k) for all k] / 2  
 - **Category k specified** = shift(k)  
 Shift Disagreement for k  
-Equation = difference(k) – quantity(k) – exchange(k)  
-#### Example    
-
-
-
-
-
+Equation = difference(k) – quantity(k) – exchange(k)    
+#### Example     
+```python
+print('Total Shift Disagreement:', pd_table_func.shift(), 'Hectares')
+```  
+```python
+print('Shift Disagreement for Category 1:', pd_table_func.shift(0), 'Hectares')
+```    
 
 # Further Information & Contact
 - **Library Information:**  
