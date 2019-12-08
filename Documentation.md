@@ -71,9 +71,9 @@ print('Size of Category 1 in Y:', NewDataFrame.size(0,'Y'),'Hectares')
 - Function to compute difference for all or one category  
 #### Arguments  
 - **No category specified** = difference()  
-Equation = Total Size - Hits    
+Equation = (Total Size - Hits)    
 - **Category k specified** = difference(k)  
-Equation = Size-*(2*Hits) For That Category  
+Equation = (Size-*(2*Hits)) For That Category  
 #### Example  
 ```python
 print('Total Difference:', NewDataFrame.difference(), 'Hectares')  
@@ -164,10 +164,10 @@ Function to compute shift between ALL or ONE categories
 #### Arguments  
 - **No Category Specified** = shift()  
 Total Shift Disagreement  
-Equation = [sum of shift(k) for all k] / 2  
+Equation = [(sum of shift(k) for all k) / 2 ] 
 - **Category k specified** = shift(k)  
 Shift Disagreement for k  
-Equation = difference(k) – quantity(k) – exchange(k)    
+Equation = (difference(k) – quantity(k) – exchange(k))    
 #### Example     
 ```python
 print('Total Shift Disagreement:', NewDataFrame.shift(), 'Hectares')
