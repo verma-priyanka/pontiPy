@@ -7,6 +7,7 @@ Python 3.7
 December, 2019  
 
 # Dependencies & Usage
+- Required libraries for pontiPy usage
 ```python
 import numpy as np
 import pandas as pd
