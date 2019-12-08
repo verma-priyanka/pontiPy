@@ -34,20 +34,21 @@ display(pd_table_func.contingency_table())
 ![image](images/postCSV.PNG "Contingency Table")
 
 
-
-## size() 
+## Size  
 - Function to Compute Size for all or one Category k  
-- Axis must be specified when category k is specified  
-- Determines if row or column sum for category k will be returned  
-#### Arguments
-- **No category specified** = Size of extent  
-- **Category k specified** = Size of category k  
-a) Axis 'X' = Size of category k in X (row sum): size(k, X)  
-b) Axis 'Y' = Size of category k in Y (col sum): size(k, Y)
-c) No Axis specified = Size of category k  
-- **size(k, X or Y, TRUE)** = Dictionary listing the size of other categories contained in category k (includes hits)  
-
-#### Example
+- Axis must be specified when category k is specified   
+- Determines if row or column sum for category k will be returned   
+#### Arguments  
+**No category specified** = size()  
+- Size of Extent  
+**Category k specified** = size(k)  
+- Size of category k    
+-a) Axis 'X' = Size of category k in X (row sum): size(k, X)  
+-b) Axis 'Y' = Size of category k in Y (col sum): size(k, Y)  
+-c) No Axis specified = Size of category k  
+**Category k Specified with TRUE** = size(k, X or Y, TRUE)  
+- Dictionary listing the size of other categories contained in category k (includes hits)  
+#### Example  
 ```python
 print('Size of Extent:', pd_table_func.size(), 'Hectares') 
 ```
@@ -64,20 +65,24 @@ print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
 >> _Size of Category 1 in Y: 2144 Hectares_  
 
 
-## difference()  
-- Function to compute difference for all or one category
-#### Arguments
-- **No category specified** = Total Size - Hits  
-- **Category K specified** = Size-*(2*Hits) For That Category  
+## Difference 
+- Function to compute difference for all or one category  
+#### Arguments  
+**No category specified** = difference()  
+- Equation = Total Size - Hits    
+**Category k specified** = difference(k)  
+- Equation = Size-*(2*Hits) For That Category  
 #### Example
 
 
-## hits(), miss(), false_alarm()
-- Functions to compute Hits, Misses, and False Alarms
-#### Arguments
-- **No Category specified** = Sum of Total Hits, Misses, or False Alarms  
-- **Category k specified** = Hits, Misses, or False Alarms for Category k
-#### Example
+## Hits, Miss, and False Alarm  
+- Functions to compute Hits, Misses, and False Alarms  
+#### Arguments  
+**No Category specified** = hits(), miss(), false_alarm()  
+- Sum of Total Hits, Misses, or False Alarms  
+**Category k specified** = hits(k), miss(k), false_alarm(k)  
+- Hits, Misses, or False Alarms for Category k  
+#### Example  
 ```python
 print('Total Hits:', pd_table_func.hits(), 'Hectares')  
 ```
@@ -97,38 +102,35 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 ## Quantity 
 Function to compute quantity between all or one category  
 Returns as a dictionary  
-
-#### Arguments  
-**No Category Specified** = quantity()
-- Total Quantity Disagreement
-- Equation = [Sum of quantity(k) for all k] / 2 
-
-**Category k Specified:** = quantity(k)
-- Quantity Disagreement for k: |M-F| 
-
-**Category k Specified with TRUE parameter):** = quantity(k,TRUE)
+#### Arguments    
+**No Category Specified** = quantity()  
+- Total Quantity Disagreement  
+- Equation = [Sum of quantity(k) for all k] / 2  
+**Category k Specified:** = quantity(k)    
+- Quantity Disagreement for k: |M-F|   
+**Category k Specified with TRUE parameter):** = quantity(k,TRUE)  
 - Quantity is returned with Miss or False Alarm labels:  
-If M-F is positive = Miss Quantity  
-If M-F is negative = False Alarm Quantity  
-If value = 0, then Quantity is 0  
+If M-F is positive = Miss Quantity   
+If M-F is negative = False Alarm Quantity    
+If value = 0, then Quantity is 0    
+#### Example  
 
-
-## Exchange    
-Function to compute Exchange between ALL, ONE or TWO categories    
-#### Arguments
-**No Category Specified** = exchange()    
-- Sum of total exchange is returned  
-- (Total must be false)
-**If total is False and 1 category is specified:** =  
-Return is exchange for that category with all other categories + a total value in dict   
-- **If Total is True and 1 category is specified:**   
+## Exchange      
+Function to compute Exchange between ALL, ONE or TWO categories     
+#### Arguments  
+**No Category Specified** = exchange()      
+- Sum of total exchange is returned   
+- Total must be false  
+**If total is False and 1 category is specified:** =  exchange(TRUE,k)  
+Return is exchange for that category with all other categories + a total value in dictionary   
+- **If Total is True and 1 category is specified:** = exchange(FALSE,k)  
 Return is total exchange for that category  
-- **If 2 categories are specified (Total must be false):**  
+- **If 2 categories are specified (Total must be false):** = exchange(FALSE,k,k)  
 Return exchange between 2 categories  
+#### Example   
 
 
-
-## shift()  
+## Shift  
 Function to compute shift between ALL or ONE categories  
 #### Arguments  
 **No Category Specified** = shift()  
@@ -137,9 +139,7 @@ Function to compute shift between ALL or ONE categories
 **Category k specified** = shift(k)  
 - Shift Disagreement for k  
 - Equation = difference(k) – quantity(k) – exchange(k)  
-
-
-
+#### Example    
 
 
 
