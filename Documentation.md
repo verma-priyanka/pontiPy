@@ -116,7 +116,7 @@ Returns as a dictionary
 #### Arguments    
 - **No Category Specified** = quantity()  
 Total Quantity Disagreement  
-Equation = [Sum of quantity(k) for all k] / 2  
+Equation = [(Sum of quantity(k) for all k) / 2 ]  
 - **Category k Specified:** = quantity(k)    
 Quantity Disagreement for k: |M-F|   
 - **Category k Specified with TRUE parameter):** = quantity(k,TRUE)  
