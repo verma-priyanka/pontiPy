@@ -11,10 +11,13 @@ December, 2019
 import numpy as np
 import pandas as pd
 ```
-
+- Creating a Dataframe from an inputted Sample & Loading the pontiPy package
 ```python
-pd_table_func = testpontipy2(df)
+initialDataFrame = pd.read_csv('sample.csv', index_col= 0)
+display(initialDataFrame)
+NewDataFrame = testpontipy2(initialDataFrame)
 ```
+![image](images/preCSV.PNG "Dataframe")
 
 # Functions  
 Available functions in library  
@@ -24,25 +27,11 @@ Available functions in library
 This will generate the final output contingency table  
 #### Arguments  
 - **Generates Initial Contingency Table** = contingency_table()  
-- **Generates Final Contingency Table**  
-```python
- def contingency_table(self):
-        # in contingency, add last item as sum of fa and misses
-        self.dataframe["Hits"] = self.hits('CONTINGENCY')
-        self.dataframe["Miss"] =self.miss('CONTINGENCY')
-        self.dataframe["False Alarm"] = self.false_alarm('CONTINGENCY')
-        return self.dataframe
-```  
+  
 #### Examples  
+- Displaying the sample data through the contingency table function
 ```python
-df = pd.read_csv('sample.csv', index_col= 0)
-display(df)
-```  
-![image](images/preCSV.PNG "Dataframe")
-
-
-```python
-display(pd_table_func.contingency_table())
+display(NewDataFrame.contingency_table())
 ```
 ![image](images/postCSV.PNG "Contingency Table")
 
@@ -63,17 +52,17 @@ c) No Axis specified = Size of category k
 Dictionary listing the size of other categories contained in category k (includes hits)  
 #### Example  
 ```python
-print('Size of Extent:', pd_table_func.size(), 'Hectares') 
+print('Size of Extent:', NewDataFrame.size(), 'Hectares') 
 ```
 >> _Size of Extent: 25662 Hectares_  
 
 ```python
-print('Size of Category 1 in X:', pd_table_func.size(0,'X'),'Hectares')  
+print('Size of Category 1 in X:', NewDataFrame.size(0,'X'),'Hectares')  
 ```
 >> _Size of Category 1 in X: 2296 Hectares_  
 
 ```python
-print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
+print('Size of Category 1 in Y:', NewDataFrame.size(0,'Y'),'Hectares')
 ```
 >> _Size of Category 1 in Y: 2144 Hectares_  
 
@@ -87,12 +76,12 @@ Equation = Total Size - Hits
 Equation = Size-*(2*Hits) For That Category  
 #### Example  
 ```python
-print('Total Difference:', pd_table_func.difference(), 'Hectares')  
+print('Total Difference:', NewDataFrame.difference(), 'Hectares')  
 ```  
 >> _Total Difference:  Hectares_  
 
 ```python
-print('Difference for Category 1:', pd_table_func.difference(0), 'Hectares')  
+print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
 ```   
 >> _Difference for Category 1:  Hectares_  
 
@@ -106,17 +95,17 @@ Sum of Total Hits, Misses, or False Alarms
 Hits, Misses, or False Alarms for Category k  
 #### Example  
 ```python
-print('Total Hits:', pd_table_func.hits(), 'Hectares')  
+print('Total Hits:', NewDataFrame.hits(), 'Hectares')  
 ```
 >> _Total Hits: 3553 Hectares_  
 
 ```python
-print('Total Misses:', pd_table_func.miss(), 'Hectares')  
+print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
 ```
 >> _Total Misses: 8735 Hectares_  
 
 ```python
-print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')  
+print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
 ```
 >> _The Total False Alarms: 8735 Hectares_  
 
@@ -137,12 +126,12 @@ If M-F is negative = False Alarm Quantity
 If value = 0, then Quantity is 0    
 #### Example  
 ```python
-print('Total Quantity Disagreement:', pd_table_func.quantity(), 'Hectares')
+print('Total Quantity Disagreement:', NewDataFrame.quantity(), 'Hectares')
 ```  
 >> _Total Quantity Disagreement: 76 Hectares_  
 
 ```python  
-print('Quantity Disagreement for Category 1 w/ label:', pd_table_func.quantity(0, True), 'Hectares')
+print('Quantity Disagreement for Category 1 w/ label:', NewDataFrame.quantity(0, True), 'Hectares')
 ```  
 >> _Quantity Disagreement for Category 1 w/ label: {'False Alarm': 152} Hectares_  
 
@@ -161,12 +150,12 @@ Return is total exchange for that category
 Return exchange between 2 categories  
 #### Example   
 ```python
-print('Total Exchange Disagreement:', pd_table_func.exchange(), 'Hectares')
+print('Total Exchange Disagreement:', NewDataFrame.exchange(), 'Hectares')
 ```  
 >> _Total Exchange Disagreement: 0 Hectares_  
 
 ```python
-print('Exchange between Category 1 and 2:', pd_table_func.exchange(0,1), 'Hectares')
+print('Exchange between Category 1 and 2:', NewDataFrame.exchange(0,1), 'Hectares')
 ```  
 >> _Exchange between Category 1 and 2: 0 Hectares_  
 
@@ -181,10 +170,10 @@ Shift Disagreement for k
 Equation = difference(k) – quantity(k) – exchange(k)    
 #### Example     
 ```python
-print('Total Shift Disagreement:', pd_table_func.shift(), 'Hectares')
+print('Total Shift Disagreement:', NewDataFrame.shift(), 'Hectares')
 ```  
 ```python
-print('Shift Disagreement for Category 1:', pd_table_func.shift(0), 'Hectares')
+print('Shift Disagreement for Category 1:', NewDataFrame.shift(0), 'Hectares')
 ```    
 
 # Further Information & Contact
