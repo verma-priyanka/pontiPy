@@ -42,9 +42,11 @@ display(pd_table_func.contingency_table())
 #### Arguments
 - **No category specified** = Size of extent  
 - **Category k specified** = Size of category k  
-a) Axis 'X' = Size of category k in X (row sum)  
-b) Axis 'Y' = Size of category k in Y (col sum)  
+a) Axis 'X' = Size of category k in X (row sum): size(k, X)  
+b) Axis 'Y' = Size of category k in Y (col sum): size(k, Y)
 c) No Axis specified = Size of category k  
+- **size(k, X or Y, TRUE)** = Dictionary listing the size of other categories contained in category k (includes hits)  
+
 #### Example
 ```python
 print('Size of Extent:', pd_table_func.size(), 'Hectares') 
@@ -92,36 +94,49 @@ print('The Total False Alarms:', pd_table_func.false_alarm(), 'Hectares')
 >> _The Total False Alarms: 8735 Hectares_  
 
 
-## quantity()  
+## Quantity 
 Function to compute quantity between all or one category  
 Returns as a dictionary  
 
 #### Arguments  
-**No Category Specified** = Total Quantity   
+**No Category Specified** = quantity()
+- Total Quantity Disagreement
+- Equation = [Sum of quantity(k) for all k] / 2 
 
-**Category k Specified:**  
-- Quantity is returned with labels:  
-If value > 0 = Miss Quantity  
-If value > 1 = False Alarm Quantity  
+**Category k Specified:** = quantity(k)
+- Quantity Disagreement for k: |M-F| 
+
+**Category k Specified with TRUE parameter):** = quantity(k,TRUE)
+- Quantity is returned with Miss or False Alarm labels:  
+If M-F is positive = Miss Quantity  
+If M-F is negative = False Alarm Quantity  
 If value = 0, then Quantity is 0  
 
 
-## exchange    
+## Exchange    
 Function to compute Exchange between ALL, ONE or TWO categories    
-- **No Category Specified** = (Total must be false):    
-Sum of total exchange is returned   
-- **If total is False and 1 category is specified:**  
+#### Arguments
+**No Category Specified** = exchange()    
+- Sum of total exchange is returned  
+- (Total must be false)
+**If total is False and 1 category is specified:** =  
 Return is exchange for that category with all other categories + a total value in dict   
 - **If Total is True and 1 category is specified:**   
 Return is total exchange for that category  
 - **If 2 categories are specified (Total must be false):**  
 Return exchange between 2 categories  
-#### Arguments
 
 
-## shift()
-#### Arguments
 
+## shift()  
+Function to compute shift between ALL or ONE categories  
+#### Arguments  
+**No Category Specified** = shift()  
+- Total Shift Disagreement  
+- Equation = [sum of shift(k) for all k] / 2  
+**Category k specified** = shift(k)  
+- Shift Disagreement for k  
+- Equation = difference(k) – quantity(k) – exchange(k)  
 
 
 
