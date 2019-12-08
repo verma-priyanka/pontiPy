@@ -16,11 +16,24 @@ import pandas as pd
 pd_table_func = testpontipy2(df)
 ```
 
-# Functions
-Available functions in library
-## contingency_table()
-#### Arguments
-#### Example
+# Functions  
+Available functions in library  
+## Contingency Table  
+- Displays inputted matrix  
+- Generates PontiusMatrix Contingency Table  
+This will generate the final output contingency table  
+#### Arguments  
+- **Generates Initial Contingency Table** = contingency_table()  
+- **Generates Final Contingency Table**  
+```python
+ def contingency_table(self):
+        # in contingency, add last item as sum of fa and misses
+        self.dataframe["Hits"] = self.hits('CONTINGENCY')
+        self.dataframe["Miss"] =self.miss('CONTINGENCY')
+        self.dataframe["False Alarm"] = self.false_alarm('CONTINGENCY')
+        return self.dataframe
+```  
+#### Examples
 ```python
 df = pd.read_csv('sample.csv', index_col= 0)
 display(df)
