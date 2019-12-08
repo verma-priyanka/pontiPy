@@ -33,11 +33,11 @@ This will generate the final output contingency table
         self.dataframe["False Alarm"] = self.false_alarm('CONTINGENCY')
         return self.dataframe
 ```  
-#### Examples
+#### Examples  
 ```python
 df = pd.read_csv('sample.csv', index_col= 0)
 display(df)
-```
+```  
 ![image](images/preCSV.PNG "Dataframe")
 
 
@@ -85,7 +85,16 @@ print('Size of Category 1 in Y:', pd_table_func.size(0,'Y'),'Hectares')
 Equation = Total Size - Hits    
 - **Category k specified** = difference(k)  
 Equation = Size-*(2*Hits) For That Category  
-#### Example
+#### Example  
+```python
+print('Total Difference:', pd_table_func.difference(), 'Hectares')  
+```  
+>> _Total Difference:  Hectares_  
+
+```python
+print('Difference for Category 1:', pd_table_func.difference(0), 'Hectares')  
+```   
+>> _Difference for Category 1:  Hectares_  
 
 
 ## Hits, Miss, and False Alarm  
@@ -127,6 +136,16 @@ If M-F is positive = Miss Quantity
 If M-F is negative = False Alarm Quantity    
 If value = 0, then Quantity is 0    
 #### Example  
+```python
+print('Total Quantity Disagreement:', pd_table_func.quantity(), 'Hectares')
+```  
+>> _Total Quantity Disagreement: 76 Hectares_  
+
+```python  
+print('Quantity Disagreement for Category 1 w/ label:', pd_table_func.quantity(0, True), 'Hectares')
+```  
+>> _Quantity Disagreement for Category 1 w/ label: {'False Alarm': 152} Hectares_  
+
 
 ## Exchange      
 Function to compute Exchange between ALL, ONE or TWO categories     
@@ -141,7 +160,15 @@ Return is total exchange for that category
 - **If 2 categories are specified (Total must be false):** = exchange(FALSE,k,k)  
 Return exchange between 2 categories  
 #### Example   
+```python
+print('Total Exchange Disagreement:', pd_table_func.exchange(), 'Hectares')
+```  
+>> _Total Exchange Disagreement: 0 Hectares_  
 
+```python
+print('Exchange between Category 1 and 2:', pd_table_func.exchange(0,1), 'Hectares')
+```  
+>> _Exchange between Category 1 and 2: 0 Hectares_  
 
 ## Shift  
 Function to compute shift between ALL or ONE categories  
