@@ -1,9 +1,8 @@
 #---------------------------------------------------------------------------------------------
-# Project Name: Pontius Matrix
+# Project Name: Python Library for Pontius Matrix
 # Collaborators: Priscilla Ahn, Max Enger, Jordan Frey, Priyanka Verma
 # Purpose: Automation of Pontius Matrix Creation
 # Created: 10/28/2019
-# Input: Contingency Table from PM
 # Python Version: Python 3.7
 #---------------------------------------------------------------------------------------------
 
@@ -261,11 +260,9 @@ class pontiPy(object):
             total_shift = 0
             for i in range(len(self.dataframe)-1):
                 total_shift += (self.difference(i) - self.quantity(i) - self.exchange(i, Total = True))
-            return total_shift
-            # divide by 2
-            # return self.quantity()/2
+            return total_shift/2
         else:
-            return self.difference(category)-self.quantity(category)-self.exchange(category)
+            return self.difference(category)-self.quantity(category)-self.exchange(category, Total = True)
 
     # Generate final matrix
     # This function will call previous functions
