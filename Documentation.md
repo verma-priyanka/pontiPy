@@ -17,7 +17,7 @@ Latest Publish Date: December, 2019
 ```python
 import numpy as np
 import pandas as pd
-from pontiPy import pontiP
+from pontiPy import pontiPy
 ```
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package
 ```python
