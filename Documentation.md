@@ -11,6 +11,7 @@ Python Version: 3.7
 Latest Publish Date: December, 2019  
 
 # Downloads & Dependencies  
+- Installation through pip:
 ```
 pip install -i https://test.pypi.org/simple/ pontiPy==1.1 
 ```
