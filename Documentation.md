@@ -80,13 +80,9 @@ Equation = (Size-*(2*Hits)) For That Category
 ```python
 print('Total Difference:', NewDataFrame.difference(), 'Hectares')  
 ```  
->> _Total Difference:  Hectares_  
-
 ```python
 print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
 ```   
->> _Difference for Category 1:  Hectares_  
-
 
 ## Hits, Miss, and False Alarm  
 - Functions to compute Hits, Misses, and False Alarms  
