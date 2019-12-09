@@ -4,7 +4,7 @@
 
 # Description
 Python Library to automate the creation and analysis of PonitusMatrix.  
-Version 1.2  
+Version 1.2 (Multiple Categories)  
 Python 3.7  
 December, 2019  
 
