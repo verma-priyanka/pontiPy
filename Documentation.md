@@ -3,10 +3,12 @@
 ![image](images/slide-02.png "user")
 
 # Description
-Python Library to automate the creation and analysis of PonitusMatrix.  
-Version 1.2 (Multiple Categories)  
-Python 3.7  
-December, 2019  
+Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
+Version History: 
+- Version 1.0 (Multiple Categories)
+- Version 1.1 (Multiple Categories, Quantity, Exchange, Shift, Size, Difference)  
+Python Version: 3.7  
+Latest Publish Date: December, 2019  
 
 # Dependencies & Usage
 - Required libraries for pontiPy usage
