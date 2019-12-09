@@ -1,6 +1,6 @@
 ![image](images/01.png "New")
-![image](images/slide_01.png "Versions")
-![image](images/slide_02.png "user")
+![image](images/slide-01.png "Versions")
+![image](images/slide-02.png "user")
 # Description
 Python Library to automate the creation and analysis of PonitusMatrix.  
 Version 1.2  
