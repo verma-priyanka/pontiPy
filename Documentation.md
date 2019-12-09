@@ -10,15 +10,18 @@ Version History:
 Python Version: 3.7  
 Latest Publish Date: December, 2019  
 
-# Dependencies & Usage
-- Download: pip install -i https://test.pypi.org/simple/ pontiPy==0.4.0  
-- Required libraries for pontiPy usage
+# Downloads & Dependencies  
+```
+pip install -i https://test.pypi.org/simple/ pontiPy==1.1 
+```
 
+- Required libraries for pontiPy usage: **Pandas**
 ```python
 import numpy as np
 import pandas as pd
 from pontiPy import pontiPy
 ```
+
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package
 ```python
 initialDataFrame = pd.read_csv('sample.csv', index_col= 0)
