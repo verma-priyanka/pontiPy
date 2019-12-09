@@ -23,22 +23,22 @@ from pontiPy import pontiPy
 ```python
 initialDataFrame = pd.read_csv('sample.csv', index_col= 0)
 display(initialDataFrame)
-NewDataFrame = testpontipy2(initialDataFrame)
+NewDataFrame = pontiPy(initialDataFrame)
 ```
 ![image](images/preCSV.PNG "Dataframe")
 
 # Functions  
 Available functions in pontiPy Library  
-## Contingency Table  
+## Matrix  
 - Displays inputted matrix  
 - Generates PontiusMatrix Contingency Table  
 This will generate the final output contingency table  
 #### Arguments  
-- **Generates Initial Contingency Table** = contingency_table()  
+- **Generates Initial Contingency Table** = matrix()  
 #### Examples  
 - Displaying the sample data through the contingency table function
 ```python
-display(NewDataFrame.contingency_table())
+display(NewDataFrame.matrix())
 ```
 ![image](images/postCSV.PNG "Contingency Table")
 
@@ -57,6 +57,9 @@ b) Axis 'Y' = Size of category k in Y (col sum): size(k, Y)
 c) No Axis specified = Size of category k  
 - **Category k Specified with TRUE** = size(k, X or Y, TRUE)  
 Dictionary listing the size of other categories contained in category k (includes hits)  
+- **Category k Specified, Total** = size(k, Total = TRUE)  
+Returns the Total. Only works if a category is provided. If True, returns the total size (x & y) for category k
+
 #### Example  
 ```python
 print('Size of Extent:', NewDataFrame.size(), 'Hectares') 
@@ -89,16 +92,16 @@ print('Total Difference:', NewDataFrame.difference(), 'Hectares')
 print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
 ```   
 
-## Hits, Miss, and False Alarm  
+## Hit, Miss, and False Alarm  
 - Functions to compute Hits, Misses, and False Alarms  
 #### Arguments  
-- **No Category specified** = hits(), miss(), false_alarm()  
+- **No Category specified** = hit(), miss(), false_alarm()  
 Sum of Total Hits, Misses, or False Alarms  
-- **Category k specified** = hits(k), miss(k), false_alarm(k)  
+- **Category k specified** = hit(k), miss(k), false_alarm(k)  
 Hits, Misses, or False Alarms for Category k  
 #### Example  
 ```python
-print('Total Hits:', NewDataFrame.hits(), 'Hectares')  
+print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
 ```
 >> _Total Hits: 3553 Hectares_  
 
