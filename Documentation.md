@@ -6,7 +6,7 @@
 Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
 Version History: 
 - Version 1.0 (Multiple Categories)
-- Version 1.1 (Multiple Categories, Quantity, Exchange, Shift, Size, Difference)  
+- Version 1.1 (Multiple Categories, Quantity, Exchange, **Shift**, Size, Difference)  
 Python Version: 3.7  
 Latest Publish Date: December, 2019  
 
