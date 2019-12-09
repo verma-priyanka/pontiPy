@@ -1,4 +1,4 @@
-![image](images/01.PNG "Logo")
+![image](images/01.PNG "New")
 
 # Description
 Python Library to automate the creation and analysis of PonitusMatrix.  
