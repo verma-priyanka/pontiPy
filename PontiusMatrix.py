@@ -18,9 +18,9 @@ class pontiPy(object):
         self.dataframe.loc['Row Sum'] = self.dataframe.sum(axis=0)
 
     # Function to compute Hits
-    def hits(self, category = None):
+    def hit(self, category = None):
         _hits = []
-        for i in range(len(self.dataframe)):
+        for i in range(len(self.dataframe)-1):
             # Hits = Diagonal cells
             _hits.append(self.dataframe.iloc[i][i])
         # if no category is specified
@@ -43,9 +43,10 @@ class pontiPy(object):
         _false_alarm = []
         # subtract one to get # of categories
         # removes row sum from the length
+        df_length = (len(self.dataframe) - 1)
         for i in range(len(self.dataframe)):
             # False alarms = Column Sum - Hits for each category
-            _false_alarm.append(self.dataframe.iloc[i][4]-self.dataframe.iloc[i][i])
+            _false_alarm.append(self.dataframe.iloc[i][df_length]-self.dataframe.iloc[i][i])
         # if no category is specified
         # len-1 because total false alarm sum is included in list
         if category is None:
@@ -62,9 +63,10 @@ class pontiPy(object):
     # Function to compute miss
     def miss(self, category = None):
         _miss = []
+        df_length = len(self.dataframe)-1
         for i in range(len(self.dataframe)):
             # miss = Row Sum - Hits for each category
-            _miss.append(self.dataframe.iloc[4][i]-self.dataframe.iloc[i][i])
+            _miss.append(self.dataframe.iloc[df_length][i]- self.dataframe.iloc[i][i])
         # if no category is specified
         if category is None:
             return sum(_miss[0:len(_miss)-1])
@@ -80,13 +82,13 @@ class pontiPy(object):
     # Function to compute Exchange between ALL, ONE or TWO categories
     """
        1. If no category is specified (Total must be false):
-        Sum of total exchange is returned
+            Sum of total exchange is returned
        2. If total is False and 1 category is specified:
-        Return is exchange for that category with all other categories + a total value in dict
+            Return is exchange for that category with all other categories + a total value in dict
        3. If Total is True and 1 category is specified:
-        Return is total exchange for that category
+            Return is total exchange for that category
        4. If 2 categories are specified (Total must be false):
-        Return exchange between 2 categories
+            Return exchange between 2 categories
     """
     def exchange(self, category1 = None,category2 = None, Total = False):
         _exchange = {}
@@ -101,14 +103,12 @@ class pontiPy(object):
                     _catlist.append(min(self.dataframe.iloc[i][j],self.dataframe.iloc[j][i]))
             # Append exchange list for each category to dictionary
             _exchange[i]=_catlist
-            # print('Exchange for Category',i,": ",_catlist)
         # A condensed list of category and exchange sum for each
         ex_by_category = ({k: sum(v) for k, v in _exchange.items()})
         if category1 is None and Total is False:
             # Total exchange
             return sum(ex_by_category.values())
         elif Total is True and category2 is None:
-            print(ex_by_category)
             return ex_by_category[category1]
         # If one category is specified
         # Return is exchange with all categories
@@ -143,9 +143,7 @@ class pontiPy(object):
                     _single_category[_cat_key] = _exchange[category1][i]
             _single_category['Total Exchange'] = sum(_single_category.values())
             return _single_category
-        # ***I THINK THIS WORKS: @Max + @Priscilla TO VALIDATE***
-        # There may also be an easier way to do this
-        # Check with different combinations of categories
+
         # To calculate exchange within pairs, it needs to find the index of the categories in dict
         else:
             # Categories provided as params cannot be the same since exchange happens in pairs
@@ -166,22 +164,23 @@ class pontiPy(object):
     # Function to compute quantity between all or one category
     # Requires at least 1 category in parameter
     def quantity(self, category = None, label = False):
-        # Returned as a dictionary
-        # If no category is specified, return total quantity
-        _quantity = {}
-        # Calculate quantity by subtracting false alarms from misses
-        _q_by_category = self.miss(category)-self.false_alarm(category)
-        # Quantity Labels
-        # If greater than 0, it is a miss quantity
-        if _q_by_category > 0:
-            _quantity['Miss'] = abs(_q_by_category)
-        # If greater than 1, it is a false alarm quantity
-        elif _q_by_category < 0:
-            _quantity['False Alarm'] = abs(_q_by_category)
-        # If 0, quantity is 0
-        else:
-        # if it isn't a miss or false alarm quantity
-            _quantity['Blank'] = abs(_q_by_category)
+        if category is not None:
+            # Returned as a dictionary
+            # If no category is specified, return total quantity
+            _quantity = {}
+            # Calculate quantity by subtracting false alarms from misses
+            _q_by_category = self.miss(category) - self.false_alarm(category)
+            # Quantity Labels
+            # If greater than 0, it is a miss quantity
+            if _q_by_category > 0:
+                _quantity['Miss'] = abs(_q_by_category)
+            # If greater than 1, it is a false alarm quantity
+            elif _q_by_category < 0:
+                _quantity['False Alarm'] = abs(_q_by_category)
+            # If 0, quantity is 0
+            else:
+            # if it isn't a miss or false alarm quantity
+                _quantity['Blank'] = abs(_q_by_category)
 
          # If no category is specified: return the absolute sum of all quantity
         # Divide sum quantity by 2
@@ -204,39 +203,83 @@ class pontiPy(object):
     # Function to compute size for all or one category
     # Axis must be specified when category is specified
     # Determines if row or col sum for category will be returned
-    def size(self, category = None, axis= None):
+    def size(self, category = None, axis= None, Total = False):
         # size of the data frame is returned
         if category is None and axis is None:
             return self.dataframe.at['Row Sum', 'Col Sum']
         # return col or row sum for category depending on axis
-        else:
-            # If x is specified, return col sum for category
-            if axis == 'X' or axis == 'x':
-                _col_sum = self.dataframe['Col Sum'][category]
-                return _col_sum
-            # If y is specified, return row sum for category
-            elif axis == 'Y' or axis == 'y':
-                _row_sum = self.dataframe.loc['Row Sum'][category]
-                return _row_sum
-            # if axis isn't specified, return the sum of col and row sum for category
+        # An axis (x or y) must be provided with a category
+        elif category is not None and axis is not None:
+            if Total is False:
+                # If x is specified, return col sum for category
+                if axis.lower() == 'x':
+                    _col_sum = self.dataframe['Col Sum'][category]
+                    return _col_sum
+                # If y is specified, return row sum for category
+                elif axis.lower() == 'y':
+                    _row_sum = self.dataframe.loc['Row Sum'][category]
+                    return _row_sum
+                # if axis isn't specified, return the sum of col and row sum for category
             else:
-                return self.dataframe['Col Sum'][category] + self.dataframe.loc['Row Sum'][category]
+                # Get row
+                if axis.lower() == 'x':
+                    _col_sum = self.dataframe.iloc[category]
+                    x_dict = _col_sum.to_dict()
+                    # Remove col sum and False Alarms if they exist
+                    x_dict.pop('Col Sum', None)
+                    x_dict.pop('False Alarms', None)
+                    return x_dict
+                # If y is specified, return col for category
+                elif axis.lower() == 'y':
+                    # list of i
+                    index_list = self.dataframe.index
+                    for col in index_list:
+                        pos = (self.dataframe.index.get_loc(col))
+                        if pos == category:
+                            y_dict = self.dataframe.get(col).to_dict()
+                            # Remove Row Sum and Misses if they exist in dictionary
+                            y_dict.pop('Row Sum', None)
+                            y_dict.pop('Misses', None)
+                            return y_dict
+        else:
+            return(self.size(category, axis = 'x') + self.size(category, axis = 'y'))
 
     # Function to compute difference for all or one category
     def difference(self, category = None):
         # if no category is specified, return total size-hits
         if category is None:
-            return self.size(self.dataframe)-self.hits(self.dataframe)
+            _total_diff = self.size() - self.hit()
+            return _total_diff
         # if category is specified: return size-2*hits for that category
         else:
-            return self.size(0)-2*(self.hits(0))
+            return self.size(category) - 2*(self.hit(category))
 
-    # This function will call all the previous functions
-    # This will generate the final output contingency table Prissskilla designs
-    def contingency_table(self):
-        # in contingency, add last item as sum of fa and misses
-        self.dataframe["Hits"] = self.hits('CONTINGENCY')
-        self.dataframe["Miss"] =self.miss('CONTINGENCY')
-        self.dataframe["False Alarm"] = self.false_alarm('CONTINGENCY')
-        return self.dataframe
+    # Function to compute total shift or shift for one category
+    def shift(self, category = None):
+        if category is None:
+            # loop each category
+            total_shift = 0
+            for i in range(len(self.dataframe)-1):
+                total_shift += (self.difference(i) - self.quantity(i) - self.exchange(i, Total = True))
+            return total_shift
+            # divide by 2
+            # return self.quantity()/2
+        else:
+            return self.difference(category)-self.quantity(category)-self.exchange(category)
+
+    # Generate final matrix
+    # This function will call previous functions
+    def matrix(self):
+        _matrix = self.dataframe
+        miss_row = self.miss('CONTINGENCY')
+        # Add a blank item since the False Alarm column will not have misses
+        # This is required since the list size will differ from matrix size
+        miss_row.append('')
+        # Add False alarm to matrix
+        _matrix["False Alarms"] = self.false_alarm('CONTINGENCY')
+        # Add Misses to matrix
+        _matrix.loc['Misses'] = miss_row
+        return _matrix
+
+
 
