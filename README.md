@@ -32,6 +32,30 @@ NewDataFrame = pontiPy(initialDataFrame)
 
 # Functions  
 Available functions in pontiPy Library  
+
+## Hit, Miss, and False Alarm  
+- Functions to compute Hits, Misses, and False Alarms  
+#### Arguments  
+- **No Category specified** = hit(), miss(), false_alarm()  
+Sum of Total Hits, Misses, or False Alarms  
+- **Category k specified** = hit(k), miss(k), false_alarm(k)  
+Hits, Misses, or False Alarms for Category k  
+#### Example  
+```python
+print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
+```
+>> _Total Hits: 3553 Hectares_  
+
+```python
+print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
+```
+>> _Total Misses: 8735 Hectares_  
+
+```python
+print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
+```
+>> _The Total False Alarms: 8735 Hectares_  
+
 ## Matrix  
 - Displays inputted matrix  
 - Generates PontiusMatrix Contingency Table  
@@ -94,30 +118,6 @@ print('Total Difference:', NewDataFrame.difference(), 'Hectares')
 ```python
 print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
 ```   
-
-## Hit, Miss, and False Alarm  
-- Functions to compute Hits, Misses, and False Alarms  
-#### Arguments  
-- **No Category specified** = hit(), miss(), false_alarm()  
-Sum of Total Hits, Misses, or False Alarms  
-- **Category k specified** = hit(k), miss(k), false_alarm(k)  
-Hits, Misses, or False Alarms for Category k  
-#### Example  
-```python
-print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
-```
->> _Total Hits: 3553 Hectares_  
-
-```python
-print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
-```
->> _Total Misses: 8735 Hectares_  
-
-```python
-print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
-```
->> _The Total False Alarms: 8735 Hectares_  
-
 
 ## Quantity 
 Function to compute quantity between all or one category  
