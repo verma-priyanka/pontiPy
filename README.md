@@ -18,7 +18,6 @@ pip install -i https://test.pypi.org/simple/ pontiPy==1.1
 
 - Required libraries for pontiPy usage: **Pandas**
 ```python
-import numpy as np
 import pandas as pd
 from pontiPy import pontiPy
 ```
