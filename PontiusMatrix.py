@@ -10,18 +10,19 @@ class pontiPy(object):
     def __init__(self, dataframe):
         """Return a new pandas dataframe object."""
         self.dataframe = dataframe
+        self.df_row_col_sums = dataframe.copy(deep=True)
         column_names = []
         for col in self.dataframe.columns:
             column_names.append(col)
-        self.dataframe['Col Sum'] = self.dataframe.sum(axis=1)
-        self.dataframe.loc['Row Sum'] = self.dataframe.sum(axis=0)
+        self.df_row_col_sums['Col Sum'] = self.df_row_col_sums.sum(axis=1)
+        self.df_row_col_sums.loc['Row Sum'] = self.df_row_col_sums.sum(axis=0)
 
     # Function to compute Hits
     def hit(self, category = None):
         _hits = []
-        for i in range(len(self.dataframe)-1):
+        for i in range(len(self.df_row_col_sums)-1):
             # Hits = Diagonal cells
-            _hits.append(self.dataframe.iloc[i][i])
+            _hits.append(self.df_row_col_sums.iloc[i][i])
         # if no category is specified
         # len-1 because total hit sum is included in list
         if category is None:
@@ -42,10 +43,10 @@ class pontiPy(object):
         _false_alarm = []
         # subtract one to get # of categories
         # removes row sum from the length
-        df_length = (len(self.dataframe) - 1)
-        for i in range(len(self.dataframe)):
+        df_length = (len(self.df_row_col_sums) - 1)
+        for i in range(len(self.df_row_col_sums)):
             # False alarms = Column Sum - Hits for each category
-            _false_alarm.append(self.dataframe.iloc[i][df_length]-self.dataframe.iloc[i][i])
+            _false_alarm.append(self.df_row_col_sums.iloc[i][df_length]-self.df_row_col_sums.iloc[i][i])
         # if no category is specified
         # len-1 because total false alarm sum is included in list
         if category is None:
@@ -62,10 +63,10 @@ class pontiPy(object):
     # Function to compute miss
     def miss(self, category = None):
         _miss = []
-        df_length = len(self.dataframe)-1
-        for i in range(len(self.dataframe)):
+        df_length = len(self.df_row_col_sums)-1
+        for i in range(len(self.df_row_col_sums)):
             # miss = Row Sum - Hits for each category
-            _miss.append(self.dataframe.iloc[df_length][i]- self.dataframe.iloc[i][i])
+            _miss.append(self.df_row_col_sums.iloc[df_length][i]- self.df_row_col_sums.iloc[i][i])
         # if no category is specified
         if category is None:
             return sum(_miss[0:len(_miss)-1])
@@ -91,7 +92,7 @@ class pontiPy(object):
     """
     def exchange(self, category1 = None,category2 = None, Total = False):
         _exchange = {}
-        _categories = range(len(self.dataframe)-1)
+        _categories = range(len(self.df_row_col_sums)-1)
         for i in _categories:
             # Create a list for every category
             _catlist = []
@@ -99,7 +100,7 @@ class pontiPy(object):
             for j in _categories:
                 if i != j:
                     # Create list with each exchange value for category 1
-                    _catlist.append(min(self.dataframe.iloc[i][j],self.dataframe.iloc[j][i]))
+                    _catlist.append(min(self.df_row_col_sums.iloc[i][j],self.df_row_col_sums.iloc[j][i]))
             # Append exchange list for each category to dictionary
             _exchange[i]=_catlist
         # A condensed list of category and exchange sum for each
@@ -185,7 +186,7 @@ class pontiPy(object):
         # Divide sum quantity by 2
         # Label is off by default
         if category is None:
-            _categories = range(len(self.dataframe) - 1)
+            _categories = range(len(self.df_row_col_sums) - 1)
             _quantity_sum = 0
             for i in _categories:
                 _quantity_sum += abs(self.miss(i)-self.false_alarm(i))
@@ -205,24 +206,24 @@ class pontiPy(object):
     def size(self, category = None, axis= None, Total = False):
         # size of the data frame is returned
         if category is None and axis is None:
-            return self.dataframe.at['Row Sum', 'Col Sum']
+            return self.df_row_col_sums.at['Row Sum', 'Col Sum']
         # return col or row sum for category depending on axis
         # An axis (x or y) must be provided with a category
         elif category is not None and axis is not None:
             if Total is False:
                 # If x is specified, return col sum for category
                 if axis.lower() == 'x':
-                    _col_sum = self.dataframe['Col Sum'][category]
+                    _col_sum = self.df_row_col_sums['Col Sum'][category]
                     return _col_sum
                 # If y is specified, return row sum for category
                 elif axis.lower() == 'y':
-                    _row_sum = self.dataframe.loc['Row Sum'][category]
+                    _row_sum = self.df_row_col_sums.loc['Row Sum'][category]
                     return _row_sum
                 # if axis isn't specified, return the sum of col and row sum for category
             else:
                 # Get row
                 if axis.lower() == 'x':
-                    _col_sum = self.dataframe.iloc[category]
+                    _col_sum = self.df_row_col_sums.iloc[category]
                     x_dict = _col_sum.to_dict()
                     # Remove col sum and False Alarms if they exist
                     x_dict.pop('Col Sum', None)
@@ -231,11 +232,11 @@ class pontiPy(object):
                 # If y is specified, return col for category
                 elif axis.lower() == 'y':
                     # list of i
-                    index_list = self.dataframe.index
+                    index_list = self.df_row_col_sums.index
                     for col in index_list:
-                        pos = (self.dataframe.index.get_loc(col))
+                        pos = (self.df_row_col_sums.index.get_loc(col))
                         if pos == category:
-                            y_dict = self.dataframe.get(col).to_dict()
+                            y_dict = self.df_row_col_sums.get(col).to_dict()
                             # Remove Row Sum and Misses if they exist in dictionary
                             y_dict.pop('Row Sum', None)
                             y_dict.pop('Misses', None)
@@ -258,7 +259,7 @@ class pontiPy(object):
         if category is None:
             # loop each category
             total_shift = 0
-            for i in range(len(self.dataframe)-1):
+            for i in range(len(self.df_row_col_sums)-1):
                 total_shift += (self.difference(i) - self.quantity(i) - self.exchange(i, Total = True))
             return total_shift/2
         else:
@@ -267,7 +268,7 @@ class pontiPy(object):
     # Generate final matrix
     # This function will call previous functions
     def matrix(self):
-        _matrix = self.dataframe
+        _matrix = self.df_row_col_sums
         miss_row = self.miss('CONTINGENCY')
         # Add a blank item since the False Alarm column will not have misses
         # This is required since the list size will differ from matrix size

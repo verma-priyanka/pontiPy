@@ -1,7 +1,7 @@
 from PontiusMatrix import pontiPy
 import pandas as pd
 
-df = pd.read_csv('sample_data/coastal_1995_2000.csv', index_col= 0)
+df = pd.read_csv('./SampleData/coastal_1995_2000.csv', index_col= 0)
 ob = pontiPy(df)
 
 #
@@ -15,8 +15,7 @@ ob = pontiPy(df)
 print("Shift:", ob.shift())
 print("Shift:", ob.shift(1))
 
-
-
 #print matrix
-print(ob.matrix().to_string())
+print(ob.matrix())
+print(ob.dataframe)
 
