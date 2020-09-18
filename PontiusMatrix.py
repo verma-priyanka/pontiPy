@@ -1,6 +1,6 @@
 #---------------------------------------------------------------------------------------------
 # Project Name: Python Library for Pontius Matrix
-# Collaborators: Priscilla Ahn, Max Enger, Jordan Frey, Priyanka Verma
+# Collaborators: Priyanka Verma, Priscilla Ahn, Max Enger, Jordan Frey
 # Purpose: Automation of Pontius Matrix Creation
 # Created: 10/28/2019
 # Python Version: Python 3.7
@@ -18,7 +18,7 @@ class pontiPy(object):
         self.df_row_col_sums.loc['Row Sum'] = self.df_row_col_sums.sum(axis=0)
 
     # Function to compute Hits
-    def hit(self, category = None):
+    def agreement(self, category = None):
         _hits = []
         for i in range(len(self.df_row_col_sums)-1):
             # Hits = Diagonal cells
@@ -39,7 +39,7 @@ class pontiPy(object):
             return _hits[category]
 
     # Function to compute false alarms
-    def false_alarm(self, category = None):
+    def row_disagreement(self, category = None):
         _false_alarm = []
         # subtract one to get # of categories
         # removes row sum from the length
@@ -61,7 +61,7 @@ class pontiPy(object):
             return _false_alarm[category]
 
     # Function to compute miss
-    def miss(self, category = None):
+    def column_disagreement(self, category = None):
         _miss = []
         df_length = len(self.df_row_col_sums)-1
         for i in range(len(self.df_row_col_sums)):
@@ -169,7 +169,7 @@ class pontiPy(object):
             # If no category is specified, return total quantity
             _quantity = {}
             # Calculate quantity by subtracting false alarms from misses
-            _q_by_category = self.miss(category) - self.false_alarm(category)
+            _q_by_category = self.column_disagreement(category) - self.row_disagreement(category)
             # Quantity Labels
             # If greater than 0, it is a miss quantity
             if _q_by_category > 0:
@@ -189,7 +189,7 @@ class pontiPy(object):
             _categories = range(len(self.df_row_col_sums) - 1)
             _quantity_sum = 0
             for i in _categories:
-                _quantity_sum += abs(self.miss(i)-self.false_alarm(i))
+                _quantity_sum += abs(self.column_disagreement(i)-self.row_disagreement(i))
                 return int(_quantity_sum/2)
         # If True: it returns the quantity value for that category
         elif label is True:
@@ -248,11 +248,11 @@ class pontiPy(object):
     def difference(self, category = None):
         # if no category is specified, return total size-hits
         if category is None:
-            _total_diff = self.size() - self.hit()
+            _total_diff = self.size() - self.agreement()
             return _total_diff
         # if category is specified: return size-2*hits for that category
         else:
-            return self.size(category) - 2*(self.hit(category))
+            return self.size(category) - 2*(self.agreement(category))
 
     # Function to compute total shift or shift for one category
     def shift(self, category = None):
@@ -268,16 +268,69 @@ class pontiPy(object):
     # Generate final matrix
     # This function will call previous functions
     def matrix(self):
-        _matrix = self.df_row_col_sums
-        miss_row = self.miss('CONTINGENCY')
+        _matrix = self.df_row_col_sums.copy(deep=True)
+        miss_row = self.column_disagreement('CONTINGENCY')
         # Add a blank item since the False Alarm column will not have misses
         # This is required since the list size will differ from matrix size
         miss_row.append('')
         # Add False alarm to matrix
-        _matrix["False Alarms"] = self.false_alarm('CONTINGENCY')
+        _matrix["Row Disagreement"] = self.row_disagreement('CONTINGENCY')
         # Add Misses to matrix
-        _matrix.loc['Misses'] = miss_row
+        _matrix.loc['Column Disagreement'] = miss_row
+        # Rename columns for display
+        _matrix = _matrix.rename({'Col Sum': 'Sum'}, axis=1)
+        _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
         return _matrix
 
 
+class pontiPy_Change(pontiPy):
+    def loss(self, category=None):
+        return self.row_disagreement(category=category)
 
+    def gain(self, category=None):
+        return self.column_disagreement(category=category)
+
+    def persistence(self, category=None):
+        return self.agreement(category=category)
+
+    def matrix(self):
+        _matrix = self.df_row_col_sums.copy(deep=True)
+        miss_row = self.column_disagreement('CONTINGENCY')
+        # Add a blank item since the False Alarm column will not have misses
+        # This is required since the list size will differ from matrix size
+        miss_row.append('')
+        # Add False alarm to matrix
+        _matrix["Loss"] = self.row_disagreement('CONTINGENCY')
+        # Add Misses to matrix
+        _matrix.loc['Gain'] = miss_row
+        # Rename columns for display
+        _matrix = _matrix.rename({'Col Sum': 'Sum'}, axis=1)
+        _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
+        return _matrix
+
+class pontiPy_Error(pontiPy):
+    def false_alarm(self, category=None):
+        return self.row_disagreement(category=category)
+
+    def miss(self, category=None):
+        return self.column_disagreement(category=category)
+
+    def hit(self, category=None):
+        return self.agreement(category=category)
+
+    # Generate final matrix
+    # This function will call previous functions
+    def matrix(self):
+        _matrix = self.df_row_col_sums.copy(deep=True)
+        miss_row = self.column_disagreement('CONTINGENCY')
+        # Add a blank item since the False Alarm column will not have misses
+        # This is required since the list size will differ from matrix size
+        miss_row.append('')
+        # Add False alarm to matrix
+        _matrix["False Alarm"] = self.row_disagreement('CONTINGENCY')
+        # Add Misses to matrix
+        _matrix.loc['Miss'] = miss_row
+        # Rename columns for display
+        _matrix = _matrix.rename({'Col Sum': 'Sum'}, axis=1)
+        _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
+        return _matrix
