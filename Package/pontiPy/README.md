@@ -1,61 +1,27 @@
-![image](images/01.png "New")
-![image](images/slide-04.png "version")
-![image](images/slide-02.png "user")
-
-# Description
-Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
+﻿Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
 Version History: 
 - Version 1.0 (Multiple Categories)
 - Version 1.1 (Multiple Categories, Quantity, Exchange, **Shift**, Size, Difference)  
 Python Version: 3.7  
 Latest Publish Date: December, 2019  
 
-# Downloads & Dependencies  
-- Installation through pip:
-```
-pip install -i https://test.pypi.org/simple/ pontiPy==2.0.0
-```
+# Dependencies & Usage
+- Download: pip install -i https://test.pypi.org/simple/ pontiPy==0.4.0  
+- Required libraries for pontiPy usage
 
-- Required libraries for pontiPy usage: **Pandas**
 ```python
 import pandas as pd
-from pontiPy import *
+from pontiPy import pontiPy
 ```
-
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package
 ```python
 initialDataFrame = pd.read_csv('sample.csv', index_col= 0)
 display(initialDataFrame)
 NewDataFrame = pontiPy(initialDataFrame)
 ```
-![image](images/preCSV.PNG "Dataframe")
 
 # Functions  
 Available functions in pontiPy Library  
-
-## Hit, Miss, and False Alarm  
-- Functions to compute Hits, Misses, and False Alarms  
-#### Arguments  
-- **No Category specified** = agreement(), miss(), false_alarm()  
-Sum of Total Hits, Misses, or False Alarms  
-- **Category k specified** = hit(k), miss(k), false_alarm(k)  
-Hits, Misses, or False Alarms for Category k  
-#### Example  
-```python
-print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
-```
->> _Total Hits: 3553 Hectares_  
-
-```python
-print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
-```
->> _Total Misses: 8735 Hectares_  
-
-```python
-print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
-```
->> _The Total False Alarms: 8735 Hectares_  
-
 ## Matrix  
 - Displays inputted matrix  
 - Generates PontiusMatrix Contingency Table  
@@ -67,8 +33,6 @@ This will generate the final output contingency table
 ```python
 display(NewDataFrame.matrix())
 ```
-![image](images/postCSV.PNG "Contingency Table")
-
 
 ## Size  
 - Function to Compute Size for all or one Category k  
@@ -118,6 +82,30 @@ print('Total Difference:', NewDataFrame.difference(), 'Hectares')
 ```python
 print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
 ```   
+
+## Hit, Miss, and False Alarm  
+- Functions to compute Hits, Misses, and False Alarms  
+#### Arguments  
+- **No Category specified** = hit(), miss(), false_alarm()  
+Sum of Total Hits, Misses, or False Alarms  
+- **Category k specified** = hit(k), miss(k), false_alarm(k)  
+Hits, Misses, or False Alarms for Category k  
+#### Example  
+```python
+print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
+```
+>> _Total Hits: 3553 Hectares_  
+
+```python
+print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
+```
+>> _Total Misses: 8735 Hectares_  
+
+```python
+print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
+```
+>> _The Total False Alarms: 8735 Hectares_  
+
 
 ## Quantity 
 Function to compute quantity between all or one category  
