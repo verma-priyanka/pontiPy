@@ -1,6 +1,6 @@
 arrow==0.15.4
 binaryornot==0.4.4
-bleach==3.1.0
+bleach==3.1.4
 certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
