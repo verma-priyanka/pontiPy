@@ -144,6 +144,7 @@ class pontiPy(object):
                 else:
                     _cat_key = 'Category ' + str(i+1)
                     _single_category[_cat_key] = _exchange[category1][i]
+                    _single_category[_cat_key] = _exchange[category1][i]
             _single_category['Total Exchange'] = sum(_single_category.values())
             return _single_category
 
