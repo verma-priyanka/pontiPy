@@ -260,6 +260,8 @@ class pontiPy(object):
 
     # Function to compute total shift or shift for one category
     def shift(self, category = None):
+        if len(self.dataframe) <= 2:
+            raise IndexError('Shift is not available for binary categories')
         if category is None:
             # loop each category
             total_shift = 0
@@ -268,6 +270,7 @@ class pontiPy(object):
             return total_shift/2
         else:
             return self.difference(category)-self.quantity(category)-self.exchange(category, Total = True)
+
 
     # Generate final matrix
     # This function will call previous functions
