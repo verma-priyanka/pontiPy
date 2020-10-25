@@ -23,7 +23,7 @@ class pontiPy(object):
     # Function to compute Hits
     def agreement(self, category = None):
         _hits = []
-        for i in range(len(self.df_row_col_sums)-1):
+        for i in range(len(self.df_row_col_sums)):
             # Hits = Diagonal cells
             _hits.append(self.df_row_col_sums.iloc[i][i])
         # if no category is specified
@@ -194,7 +194,7 @@ class pontiPy(object):
             _quantity_sum = 0
             for i in _categories:
                 _quantity_sum += abs(self.column_disagreement(i)-self.row_disagreement(i))
-                return int(_quantity_sum/2)
+            return int(_quantity_sum/2)
         # If True: it returns the quantity value for that category
         elif label is True:
             return _quantity
