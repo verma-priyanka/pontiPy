@@ -6,7 +6,7 @@ Python Version: 3.7
 Latest Publish Date: December, 2019  
 
 # Dependencies & Usage
-- Download: pip install -i https://test.pypi.org/simple/ pontiPy==0.4.0  
+- Download: pip install -i https://test.pypi.org/simple/ pontiPy==2.4
 - Required libraries for pontiPy usage
 
 ```python

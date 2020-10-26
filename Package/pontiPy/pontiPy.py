@@ -6,6 +6,9 @@
 # Python Version: Python 3.7
 #---------------------------------------------------------------------------------------------
 
+import plotly.express as px
+import pandas as pd
+
 class pontiPy(object):
     def __init__(self, dataframe):
         """Return a new pandas dataframe object."""
@@ -20,7 +23,7 @@ class pontiPy(object):
     # Function to compute Hits
     def agreement(self, category = None):
         _hits = []
-        for i in range(len(self.df_row_col_sums)-1):
+        for i in range(len(self.df_row_col_sums)):
             # Hits = Diagonal cells
             _hits.append(self.df_row_col_sums.iloc[i][i])
         # if no category is specified
@@ -141,6 +144,7 @@ class pontiPy(object):
                 else:
                     _cat_key = 'Category ' + str(i+1)
                     _single_category[_cat_key] = _exchange[category1][i]
+                    _single_category[_cat_key] = _exchange[category1][i]
             _single_category['Total Exchange'] = sum(_single_category.values())
             return _single_category
 
@@ -190,7 +194,7 @@ class pontiPy(object):
             _quantity_sum = 0
             for i in _categories:
                 _quantity_sum += abs(self.column_disagreement(i)-self.row_disagreement(i))
-                return int(_quantity_sum/2)
+            return int(_quantity_sum/2)
         # If True: it returns the quantity value for that category
         elif label is True:
             return _quantity
@@ -271,6 +275,7 @@ class pontiPy(object):
         _matrix = self.df_row_col_sums.copy(deep=True)
         miss_row = self.column_disagreement('CONTINGENCY')
         # Add a blank item since the False Alarm column will not have misses
+        # Add a blank item since the False Alarm column will not have misses
         # This is required since the list size will differ from matrix size
         miss_row.append('')
         # Add False alarm to matrix
@@ -281,6 +286,50 @@ class pontiPy(object):
         _matrix = _matrix.rename({'Col Sum': 'Sum'}, axis=1)
         _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
         return _matrix
+
+    def entrySize(self):
+        self.nCategories = len(self.dataframe.columns)
+        self.df_list = self.dataframe.values.tolist()
+
+        self.df_plot = self.dataframe.copy(deep=True)
+        # delete sum column and row
+        self.df_plot.loc["Miss"] = self.column_disagreement('CONTINGENCY')[:-1]
+        self.df_plot.loc["False Alarm"] = self.row_disagreement('CONTINGENCY')[:-1]
+
+        # dynamically add labels in EntrySize plot based on x, y pos on plot
+        x_pos = []
+        for i in range(0, self.nCategories):
+            row_hit_sum = 0
+            for j in range(0, i):
+                row_hit_sum += (self.df_list[i][j])
+            row_hit_sum = (self.df_list[i][i] / 2) + row_hit_sum
+            x_pos.append(row_hit_sum)
+
+        fig = px.bar(self.df_plot, y=self.df_plot.index, x=self.df_plot.columns,
+                     height=350, orientation='h', width=600,
+                     opacity=1, color_discrete_sequence=px.colors.qualitative.Set1,
+                     template="simple_white")
+
+        layout = fig.update_layout(
+            font=dict(family="Trebuchet MS", size=12),
+            hovermode=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            yaxis=dict(autorange="reversed", type='category', title='Table Feature',
+                       title_font=dict(size=12, family='Trebuchet MS', color='black')),
+            xaxis=dict(title='Entry size as number of Observations', dtick=1,
+                       title_font=dict(size=12, family='Trebuchet MS', color='black')),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right",
+                        x=0.8, title='',
+                        font=dict(family="Trebuchet MS", size=12, color="black"))
+        )
+
+        for i in range(0, self.nCategories):
+            fig.add_annotation(x=x_pos[i], y=i, text="Hit", hovertext='Hits for Category 1', showarrow=False,
+                               font=dict(color='white',
+                                         family='Trebuchet MS',
+                                         size=12))
+        fig.show()
 
 
 class pontiPy_Change(pontiPy):
@@ -293,6 +342,7 @@ class pontiPy_Change(pontiPy):
     def persistence(self, category=None):
         return self.agreement(category=category)
 
+    # override method in pontiPy
     def matrix(self):
         _matrix = self.df_row_col_sums.copy(deep=True)
         miss_row = self.column_disagreement('CONTINGENCY')
@@ -318,8 +368,7 @@ class pontiPy_Error(pontiPy):
     def hit(self, category=None):
         return self.agreement(category=category)
 
-    # Generate final matrix
-    # This function will call previous functions
+    # override method in pontiPy
     def matrix(self):
         _matrix = self.df_row_col_sums.copy(deep=True)
         miss_row = self.column_disagreement('CONTINGENCY')

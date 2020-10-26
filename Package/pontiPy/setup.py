@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
     
 setup_args = dict(
     name='pontiPy',
-    version='2.0.0',
+    version='2.4',
     description="Automation of Pontius Matrix",
     license='MIT',
     packages=find_packages(),
@@ -18,7 +18,7 @@ setup_args = dict(
     include_package_data=True
 
 )
-install_requires = ['pandas']
+install_requires = ['pandas', 'plotly_express']
 
 
 if __name__ == '__main__':

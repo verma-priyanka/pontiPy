@@ -1,25 +1,18 @@
-![image](images/01.png "New")
-![image](images/slide-04.png "version")
-![image](images/slide-02.png "user")
+![image](images/logo.png "New")
 
-# Description
 Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
-Version History: 
-- Version 1.0 (Multiple Categories)
-- Version 1.1 (Multiple Categories, Quantity, Exchange, **Shift**, Size, Difference)  
-Python Version: 3.7  
-Latest Publish Date: December, 2019  
 
 # Downloads & Dependencies  
 - Installation through pip:
 ```
-pip install -i https://test.pypi.org/simple/ pontiPy==2.0.0
+pip install -i https://test.pypi.org/simple/ pontiPy==2.4
 ```
 
 - Required libraries for pontiPy usage: **Pandas**
 ```python
-import pandas as pd
 from pontiPy import *
+import pandas as pd
+import plotly.express as px
 ```
 
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package

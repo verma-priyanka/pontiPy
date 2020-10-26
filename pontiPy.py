@@ -3,7 +3,6 @@
 # Collaborators: Priyanka Verma, Priscilla Ahn, Max Enger, Jordan Frey
 # Purpose: Automation of Pontius Matrix Creation
 # Created: 10/28/2019
-# Python Version: Python 3.7
 #---------------------------------------------------------------------------------------------
 
 import plotly.express as px
