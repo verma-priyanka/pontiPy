@@ -1,4 +1,4 @@
-![image](images/logo.png "New")
+![image](images/logo.PNG "New")
 
 Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
 
