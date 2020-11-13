@@ -357,7 +357,19 @@ class pontiPy_Change(pontiPy):
         _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
         return _matrix
 
-class pontiPy_Error(pontiPy):
+class pontiPy_Error(pontiPy, stratum=None):
+    def __init__(self, pontiPy):
+        if stratum!=None:
+            self.population=self.dataframe.copy(deep=True)
+# get the sum of diagnosis and calculate the population.
+# we need a new code here to create the sum_diag column.
+# self.row_sum = self.dataframe.matrix()['Row Sum'].to_list()
+#            multiplier = [i / j for i, j in zip(stratum, self.row_sum)] 
+# add back the sum to the population df.       
+# '''create a new population dataframe that is derived from sample dataframe.'''
+        population = self.dfcopy.iloc[:, 0:-1]
+        population = population.mul(multiplier, axis = 'rows')
+        
     def false_alarm(self, category=None):
         return self.row_disagreement(category=category)
 
@@ -365,8 +377,8 @@ class pontiPy_Error(pontiPy):
         return self.column_disagreement(category=category)
 
     def hit(self, category=None):
-        return self.agreement(category=category)
-
+        return self.agreement(category=category)    
+    
     # override method in pontiPy
     def matrix(self):
         _matrix = self.df_row_col_sums.copy(deep=True)
@@ -382,3 +394,5 @@ class pontiPy_Error(pontiPy):
         _matrix = _matrix.rename({'Col Sum': 'Sum'}, axis=1)
         _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
         return _matrix
+
+test = pontiPy_Error()    
