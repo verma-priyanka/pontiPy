@@ -1,25 +1,18 @@
-![image](images/01.png "New")
-![image](images/slide-04.png "version")
-![image](images/slide-02.png "user")
+![image](images/logo.PNG "New")
 
-# Description
 Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
-Version History: 
-- Version 1.0 (Multiple Categories)
-- Version 1.1 (Multiple Categories, Quantity, Exchange, **Shift**, Size, Difference)  
-Python Version: 3.7  
-Latest Publish Date: December, 2019  
 
 # Downloads & Dependencies  
 - Installation through pip:
 ```
-pip install -i https://test.pypi.org/simple/ pontiPy==2.0.0
+pip install -i https://test.pypi.org/simple/ pontiPy==2.4
 ```
 
 - Required libraries for pontiPy usage: **Pandas**
 ```python
-import pandas as pd
 from pontiPy import *
+import pandas as pd
+import plotly.express as px
 ```
 
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package
@@ -188,6 +181,7 @@ print('Shift Disagreement for Category 1:', NewDataFrame.shift(0), 'Hectares')
 # Further Information & Contact
 - **Library Information:**  
 Priyanka Verma, prverma@clarku.edu    
+Priscilla Ahn, pahn@clarku.edu   
 
 - **Metric Methodolgy:**  
 Robert (Gil) Pontius, rpontius@clarku.edu  
@@ -206,3 +200,5 @@ _Pontius Jr, Robert Gilmore. 2019. Component intensities to relate difference by
 _Pontius Jr, Robert Gilmore and Marco Millones. 2011. Death to Kappa: birth of quantity disagreement and allocation disagreement for accuracy assessment. International Journal of Remote Sensing 32(15): 4407-4429._  
 
 _Aldwaik, Safaa Zakaria, Jeffrey A Onsted, and Robert Gilmore Pontius Jr. 2015. Behavior-based aggregation of land categories for temporal change analysis. International Journal of Applied Earth Observation and Geoinformation 35(Part B): 229-238._
+
+Contributors: Jason Jeng, Claire Wang, Sam Wen, Jordan Frey, Maxwell Enger

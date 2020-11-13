@@ -1,7 +1,7 @@
 from PontiusMatrix import pontiPy
 import pandas as pd
 
-df = pd.read_csv('./SampleData/coastal_1995_2000.csv', index_col= 0)
+df = pd.read_csv('./SampleData/class_sample.csv', index_col= 0)
 ob = pontiPy(df)
 
 #

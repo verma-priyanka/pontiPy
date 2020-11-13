@@ -3,7 +3,6 @@
 # Collaborators: Priyanka Verma, Priscilla Ahn, Max Enger, Jordan Frey
 # Purpose: Automation of Pontius Matrix Creation
 # Created: 10/28/2019
-# Python Version: Python 3.7
 #---------------------------------------------------------------------------------------------
 
 import plotly.express as px
@@ -263,13 +262,10 @@ class pontiPy(object):
         if len(self.dataframe) <= 2:
             raise IndexError('Shift is not available for binary categories')
         if category is None:
-            # loop each category
-            total_shift = 0
-            for i in range(len(self.df_row_col_sums)-1):
-                total_shift += (self.difference(i) - self.quantity(i) - self.exchange(i, Total = True))
-            return total_shift/2
+            total_shift = self.difference() - self.quantity() - self.exchange()
+            return total_shift
         else:
-            return self.difference(category)-self.quantity(category)-self.exchange(category, Total = True)
+            return (self.difference(category)-self.quantity(category)-(2*self.exchange(category, Total = True)))/2
 
 
     # Generate final matrix

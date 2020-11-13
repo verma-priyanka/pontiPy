@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pontiPy
-Version: 2.0.0
+Version: 2.4
 Summary: Automation of Pontius Matrix
 Home-page: https://github.com/verma-priyanka
 Author: Priyanka Verma
@@ -14,7 +14,7 @@ Description: ï»¿Python Library developed and created to automate the generati
         Latest Publish Date: December, 2019  
         
         # Dependencies & Usage
-        - Download: pip install -i https://test.pypi.org/simple/ pontiPy==0.4.0  
+        - Download: pip install -i https://test.pypi.org/simple/ pontiPy==2.4
         - Required libraries for pontiPy usage
         
         ```python
