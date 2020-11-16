@@ -1,0 +1,21 @@
+plotb_df = pd.read_csv(plotbData.csv, index_col= 0)
+
+fig = px.bar(plotb_df, y=plotb_df.index, x=plotb_df.columns,
+                height=350, orientation='h', width=600,
+                opacity=1, color_discrete_sequence=px.colors.qualitative.Set1,
+                template="simple_white")
+layout = fig.update_layout(
+    font=dict(family="Trebuchet MS", size=12),
+    hovermode=False,
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+    yaxis=dict(autorange="reversed", type='category', title='Table Feature',
+                title_font=dict(size=12, family='Trebuchet MS', color='black')),
+    xaxis=dict(title='Categroy size as number of Observations', dtick=1,
+                title_font=dict(size=12, family='Trebuchet MS', color='black')),
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right",
+                x=0.8, title='',
+                font=dict(family="Trebuchet MS", size=12, color="black"))
+)
+
+fig.show()
