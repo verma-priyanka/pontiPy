@@ -5,7 +5,7 @@ Python Library developed and created to automate the generation and analysis of 
 # Downloads & Dependencies  
 - Installation through pip:
 ```
-pip install -i https://test.pypi.org/simple/ pontiPy==2.4
+pip install -i https://test.pypi.org/simple/ pontiPy==2.5
 ```
 
 - Required libraries for pontiPy usage: **Pandas**
