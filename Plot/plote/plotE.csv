@@ -1,0 +1,10 @@
+,Quantity,Exchange,Shift
+False Alarm 1,0,66.66666667,0
+False Alarm 2,0,0,50
+False Alarm 3,0,40,0
+False Alarm 4,50,0,0
+Extent,15,20,15
+Miss 1,0,66.66666667,0
+Miss 2,50,0,50
+Miss 3,37.5,25,0
+Miss 4,0,0,0
