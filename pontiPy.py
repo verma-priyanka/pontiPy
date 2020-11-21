@@ -265,6 +265,8 @@ class pontiPy:
 
     # Function to compute total shift or shift for one category
     def shift(self, category = None):
+        if len(self.dataframe) <= 2:
+            raise IndexError('Shift is not available for binary categories')
         if category is None:
             total_shift = self.difference() - self.quantity() - self.exchange()
             return total_shift
