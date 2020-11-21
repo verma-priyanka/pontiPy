@@ -3,10 +3,10 @@ Version History:
 - Version 1.0 (Multiple Categories)
 - Version 1.1 (Multiple Categories, Quantity, Exchange, **Shift**, Size, Difference)  
 Python Version: 3.7  
-Latest Publish Date: December, 2019  
+Latest Publish Date: November, 2020
 
 # Dependencies & Usage
-- Download: pip install -i https://test.pypi.org/simple/ pontiPy==2.4
+- Download: pip install -i https://test.pypi.org/simple/ pontiPy==2.6
 - Required libraries for pontiPy usage
 
 ```python
