@@ -8,24 +8,18 @@
 import plotly.express as px
 import pandas as pd
 
-class pontiPy:
-    def __init__(self, dataframe, stratum = None):
+class pontiPy(object):
+    def __init__(self, dataframe):
         """Return a new pandas dataframe object."""
-        self.stratum = stratum
         self.dataframe = dataframe
-        if stratum is not None:
-            self.dfcopy = self.dataframe.copy(deep=True)
-            self.dfcopy['Sum_Diagnosis'] = self.dfcopy.sum(axis=1)
-            multiplier = [i / j for i, j in zip(self.stratum, self.dfcopy['Sum_Diagnosis'].to_list())]
-            self.dataframe = self.dfcopy.iloc[:, 0:-1]
-            self.dataframe = self.dataframe.mul(multiplier, axis='rows')
-        self.df_row_col_sums = self.dataframe.copy(deep=True)
+        self.df_row_col_sums = dataframe.copy(deep=True)
         column_names = []
         for col in self.dataframe.columns:
             column_names.append(col)
         self.df_row_col_sums['Col Sum'] = self.df_row_col_sums.sum(axis=1)
         self.df_row_col_sums.loc['Row Sum'] = self.df_row_col_sums.sum(axis=0)
 
+    # Function to compute Hits
     def agreement(self, category = None):
         _hits = []
         for i in range(len(self.df_row_col_sums)):
@@ -271,17 +265,6 @@ class pontiPy:
         else:
             return (self.difference(category)-self.quantity(category)-(2*self.exchange(category, Total = True)))/2
 
-    def uniformintensity(self, direction):
-        '''Direction must be specified as a parameter
-        options for direction: x or y'''
-        _uniformintensity = []
-        for i in range(len(self.dataframe.columns)):
-            if direction.lower() == 'x':
-                _uniformintensity.append(self.row_disagreement(i)/(self.size()-self.size(i, axis= 'y')))
-            elif direction.lower() == 'y':
-                _uniformintensity.append(self.column_disagreement(i) / (self.size() - self.size(i, axis='x')))
-        return  _uniformintensity
-
     # Generate final matrix
     # This function will call previous functions
     def matrix(self):
@@ -300,6 +283,51 @@ class pontiPy:
         _matrix = _matrix.rename({'Row Sum': 'Sum'}, axis=0)
         return _matrix
 
+    def entrySize(self):
+        self.nCategories = len(self.dataframe.columns)
+        self.df_list = self.dataframe.values.tolist()
+
+        self.df_plot = self.dataframe.copy(deep=True)
+        # delete sum column and row
+        self.df_plot.loc["Miss"] = self.column_disagreement('CONTINGENCY')[:-1]
+        self.df_plot.loc["False Alarm"] = self.row_disagreement('CONTINGENCY')[:-1]
+
+        # dynamically add labels in EntrySize plot based on x, y pos on plot
+        x_pos = []
+        for i in range(0, self.nCategories):
+            row_hit_sum = 0
+            for j in range(0, i):
+                row_hit_sum += (self.df_list[i][j])
+            row_hit_sum = (self.df_list[i][i] / 2) + row_hit_sum
+            x_pos.append(row_hit_sum)
+
+        fig = px.bar(self.df_plot, y=self.df_plot.index, x=self.df_plot.columns,
+                     height=350, orientation='h', width=600,
+                     opacity=1, color_discrete_sequence=px.colors.qualitative.Set1,
+                     template="simple_white")
+
+        layout = fig.update_layout(
+            font=dict(family="Trebuchet MS", size=12),
+            hovermode=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            yaxis=dict(autorange="reversed", type='category', title='Table Feature',
+                       title_font=dict(size=12, family='Trebuchet MS', color='black')),
+            xaxis=dict(title='Entry size as number of Observations', dtick=1,
+                       title_font=dict(size=12, family='Trebuchet MS', color='black')),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right",
+                        x=0.8, title='',
+                        font=dict(family="Trebuchet MS", size=12, color="black"))
+        )
+
+        for i in range(0, self.nCategories):
+            fig.add_annotation(x=x_pos[i], y=i, text="Hit", hovertext='Hits for Category 1', showarrow=False,
+                               font=dict(color='white',
+                                         family='Trebuchet MS',
+                                         size=12))
+        fig.show()
+
+
 class pontiPy_Change(pontiPy):
     def loss(self, category=None):
         return self.row_disagreement(category=category)
@@ -309,18 +337,6 @@ class pontiPy_Change(pontiPy):
 
     def persistence(self, category=None):
         return self.agreement(category=category)
-
-    def uniformsize(self, category=None):
-        _uniformsize_error = []
-        for i in range(len(self.dataframe.columns)):
-            _uniformsize_error.append(self.loss(i)/(len(self.dataframe.columns)-1))
-        if category is None:
-            return _uniformsize_error
-        else:
-            return _uniformsize_error[category]
-
-    def uniformintensity_change(self):
-        return self.uniformintensity(direction='Y')
 
     # override method in pontiPy
     def matrix(self):
@@ -347,18 +363,6 @@ class pontiPy_Error(pontiPy):
 
     def hit(self, category=None):
         return self.agreement(category=category)
-
-    def uniformsize(self, category=None):
-        _uniformsize_error = []
-        for i in range(len(self.dataframe.columns)):
-            _uniformsize_error.append(self.miss(i)/(len(self.dataframe.columns)-1))
-        if category is None:
-            return _uniformsize_error
-        else:
-            return _uniformsize_error[category]
-
-    def uniformintensity_error(self):
-        return self.uniformintensity(direction = 'X')
 
     # override method in pontiPy
     def matrix(self):

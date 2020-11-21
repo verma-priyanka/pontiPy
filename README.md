@@ -1,6 +1,10 @@
 ![image](images/logo.PNG "New")
 
-Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
+pontiPy: A Python Library for Detecting Change in a Cross-Tab Matrix
+
+Cross-tabulation matrices are commonly used for accuracy assessment and map comparison. The metrics quantity, shift, and exchange can be used to measure differences in a cross-tabulation matrix. We developed an open-source python library that automates the calculations of these metrics. Researchers can now automate calculations of these metrics across large datasets as well as integrate with other statistical, analytical, visualization libraries.
+
+
 
 # Downloads & Dependencies  
 - Installation through pip:
