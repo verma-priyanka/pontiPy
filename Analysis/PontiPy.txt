@@ -1,0 +1,2 @@
+Dont use 1985 data (data are predicted, not measured)
+5 years (they have already generated contengency table)
