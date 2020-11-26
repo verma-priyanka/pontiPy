@@ -1,25 +1,29 @@
-![image](images/logo.PNG "New")
+![image](images/logo_small.png "New")
 
-Python Library developed and created to automate the generation and analysis of the PonitusMatrix.  
+_A Python Library for Detecting Change in a Cross-Tab Matrix_
 
-# Downloads & Dependencies  
-- Installation through pip:
+Cross-tabulation matrices are commonly used for accuracy assessment and map comparison. The metrics quantity, shift, and exchange can be used to measure differences in a cross-tabulation matrix. We developed an open-source python library that automates the calculations of these metrics. Researchers can now automate calculations of these metrics across large datasets as well as integrate with other statistical, analytical, visualization libraries.
+
+
+#### Downloads & Dependencies  
+- Installation
 ```
-pip install -i https://test.pypi.org/simple/ pontiPy==2.4
+pip install -i https://test.pypi.org/simple/ pontiPy==2.6
 ```
 
-- Required libraries for pontiPy usage: **Pandas**
+- Dependency
 ```python
-from pontiPy import *
 import pandas as pd
-import plotly.express as px
 ```
 
 - Creating a Dataframe from an inputted Sample & Loading the pontiPy package
 ```python
-initialDataFrame = pd.read_csv('sample.csv', index_col= 0)
-display(initialDataFrame)
-NewDataFrame = pontiPy(initialDataFrame)
+from pontiPy import *
+import pandas as pd
+
+df = pd.read_csv('sample.csv', index_col= 0)
+display(df)
+df_obj = pontiPy(df)
 ```
 ![image](images/preCSV.PNG "Dataframe")
 
@@ -35,17 +39,17 @@ Sum of Total Hits, Misses, or False Alarms
 Hits, Misses, or False Alarms for Category k  
 #### Example  
 ```python
-print('Total Hits:', NewDataFrame.hit(), 'Hectares')  
+print('Total Hits:', df_obj.hit(), 'Hectares')  
 ```
 >> _Total Hits: 3553 Hectares_  
 
 ```python
-print('Total Misses:', NewDataFrame.miss(), 'Hectares')  
+print('Total Misses:', df_obj.miss(), 'Hectares')  
 ```
 >> _Total Misses: 8735 Hectares_  
 
 ```python
-print('The Total False Alarms:', NewDataFrame.false_alarm(), 'Hectares')  
+print('The Total False Alarms:', df_obj.false_alarm(), 'Hectares')  
 ```
 >> _The Total False Alarms: 8735 Hectares_  
 
@@ -58,7 +62,7 @@ This will generate the final output contingency table
 #### Examples  
 - Displaying the sample data through the contingency table function
 ```python
-display(NewDataFrame.matrix())
+display(df_obj.matrix())
 ```
 ![image](images/postCSV.PNG "Contingency Table")
 
@@ -82,17 +86,17 @@ Returns the Total. Only works if a category is provided. If True, returns the to
 
 #### Example  
 ```python
-print('Size of Extent:', NewDataFrame.size(), 'Hectares') 
+print('Size of Extent:', df_obj.size(), 'Hectares') 
 ```
 >> _Size of Extent: 25662 Hectares_  
 
 ```python
-print('Size of Category 1 in X:', NewDataFrame.size(0,'X'),'Hectares')  
+print('Size of Category 1 in X:', df_obj.size(0,'X'),'Hectares')  
 ```
 >> _Size of Category 1 in X: 2296 Hectares_  
 
 ```python
-print('Size of Category 1 in Y:', NewDataFrame.size(0,'Y'),'Hectares')
+print('Size of Category 1 in Y:', df_obj.size(0,'Y'),'Hectares')
 ```
 >> _Size of Category 1 in Y: 2144 Hectares_  
 
@@ -106,10 +110,10 @@ Equation = (Total Size - Hits)
 Equation = (Size-*(2*Hits)) For That Category  
 #### Example  
 ```python
-print('Total Difference:', NewDataFrame.difference(), 'Hectares')  
+print('Total Difference:', df_obj.difference(), 'Hectares')  
 ```  
 ```python
-print('Difference for Category 1:', NewDataFrame.difference(0), 'Hectares')  
+print('Difference for Category 1:', df_obj.difference(0), 'Hectares')  
 ```   
 
 ## Quantity 
@@ -128,12 +132,12 @@ If M-F is negative = False Alarm Quantity
 If value = 0, then Quantity is 0    
 #### Example  
 ```python
-print('Total Quantity Disagreement:', NewDataFrame.quantity(), 'Hectares')
+print('Total Quantity Disagreement:', df_obj.quantity(), 'Hectares')
 ```  
 >> _Total Quantity Disagreement: 76 Hectares_  
 
 ```python  
-print('Quantity Disagreement for Category 1 w/ label:', NewDataFrame.quantity(0, True), 'Hectares')
+print('Quantity Disagreement for Category 1 w/ label:', df_obj.quantity(0, True), 'Hectares')
 ```  
 >> _Quantity Disagreement for Category 1 w/ label: {'False Alarm': 152} Hectares_  
 
@@ -152,12 +156,12 @@ Return is total exchange for that category
 Return exchange between 2 categories  
 #### Example   
 ```python
-print('Total Exchange Disagreement:', NewDataFrame.exchange(), 'Hectares')
+print('Total Exchange Disagreement:', df_obj.exchange(), 'Hectares')
 ```  
 >> _Total Exchange Disagreement: 0 Hectares_  
 
 ```python
-print('Exchange between Category 1 and 2:', NewDataFrame.exchange(0,1), 'Hectares')
+print('Exchange between Category 1 and 2:', df_obj.exchange(0,1), 'Hectares')
 ```  
 >> _Exchange between Category 1 and 2: 0 Hectares_  
 
@@ -172,10 +176,10 @@ Shift Disagreement for k
 Equation = (difference(k) – quantity(k) – exchange(k))    
 #### Example     
 ```python
-print('Total Shift Disagreement:', NewDataFrame.shift(), 'Hectares')
+print('Total Shift Disagreement:', df_obj.shift(), 'Hectares')
 ```  
 ```python
-print('Shift Disagreement for Category 1:', NewDataFrame.shift(0), 'Hectares')
+print('Shift Disagreement for Category 1:', df_obj.shift(0), 'Hectares')
 ```    
 
 # Further Information & Contact
