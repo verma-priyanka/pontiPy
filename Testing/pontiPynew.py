@@ -1,20 +1,10 @@
-#---------------------------------------------------------------------------------------------
-# Project Name: Python Library for Pontius Matrix
-# Collaborators: Priyanka Verma, Priscilla Ahn, Max Enger, Jordan Frey
-# Purpose: Automation of Pontius Matrix Creation
-# Created: 10/28/2019
-#---------------------------------------------------------------------------------------------
-
-import plotly.express as px
-import pandas as pd
-
 class pontiPy:
     def __init__(self, dataframe, stratum = None):
         """Return a new pandas dataframe object."""
         self.stratum = stratum
         self.dataframe = dataframe
         if stratum is not None:
-            self.dfcopy = dataframe.copy(deep=True)
+            self.dfcopy = self.dataframe.copy(deep=True)
             self.dfcopy['Sum_Diagnosis'] = self.dfcopy.sum(axis=1)
             multiplier = [i / j for i, j in zip(self.stratum, self.dfcopy['Sum_Diagnosis'].to_list())]
             self.dataframe = self.dfcopy.iloc[:, 0:-1]
