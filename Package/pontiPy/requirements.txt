@@ -1,6 +1,6 @@
 awscli==1.18.38
 backcall==0.2.0
-bleach==3.2.1
+bleach==3.3.0
 botocore==1.15.38
 certifi==2020.6.20
 chardet==3.0.4
@@ -18,7 +18,7 @@ importlib-metadata==1.7.0
 ipython==7.16.1
 ipython-genutils==0.2.0
 jedi==0.17.1
-Jinja2==2.11.2
+Jinja2==2.11.3
 jmespath==0.9.5
 keyring==21.4.0
 kiwisolver==1.2.0
@@ -41,18 +41,18 @@ plotly-express==0.4.1
 pontiPy==2.3
 prompt-toolkit==3.0.3
 pyasn1==0.4.8
-Pygments==2.6.1
+Pygments==2.7.4
 pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2019.3
 pywin32-ctypes==0.2.0
-PyYAML==5.3.1
+PyYAML==5.4
 readme-renderer==26.0
 requests==2.24.0
 requests-toolbelt==0.9.1
 retrying==1.3.3
 rfc3986==1.4.0
-rsa==3.4.2
+rsa==4.7
 s3transfer==0.3.3
 scipy==1.5.0
 seaborn==0.10.1
@@ -64,7 +64,7 @@ testpontipy2==0.1.0
 tqdm==4.49.0
 traitlets==4.3.3
 twine==3.2.0
-urllib3==1.25.8
+urllib3==1.26.5
 wcwidth==0.2.5
 webencodings==0.5.1
 xarray==0.15.1
