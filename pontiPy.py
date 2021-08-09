@@ -1,8 +1,8 @@
 # ---------------------------------------------------------------------------------------------
 # Project Name: Python Library for Pontius Matrix
+# Collaborators: Priyanka Verma, Priscilla Ahn, Max Enger, Jordan Frey
 # Purpose: Automation of Pontius Matrix Creation
 # Created: 10/28/2019
-# Last Updated: 07/31/2021
 # ---------------------------------------------------------------------------------------------
 
 import pandas as pd
