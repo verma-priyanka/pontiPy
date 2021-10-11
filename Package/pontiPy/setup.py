@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
     
 setup_args = dict(
     name='pontiPy',
-    version='2.6',
+    version='3.0',
     description="Automation of Pontius Matrix",
     license='MIT',
     packages=find_packages(),
