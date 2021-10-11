@@ -16,7 +16,7 @@ pip install pontiPy
 import pandas as pd
 ```
 
-![image](misc/images/lib_structure.jpg "Dataframe")
+![image](misc/images/lib_structure.JPG "Dataframe")
 
 
 # Usage 
