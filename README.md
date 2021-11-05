@@ -25,7 +25,7 @@ import pandas as pd
 from pontiPy import *
 import pandas as pd
 
-df = pd.read_csv('sample.csv')
+df = pd.read_csv('sample.csv', index_col = 0)
 ```
 
 ![image](misc/images/change.jpg "Dataframe")
