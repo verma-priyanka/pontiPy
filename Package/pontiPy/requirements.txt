@@ -26,7 +26,7 @@ littleutils==0.2.2
 mapboxgl==0.10.2
 MarkupSafe==1.1.1
 matplotlib==3.2.2
-numpy==1.21.0
+numpy==1.22.0
 outdated==0.2.0
 packaging==20.4
 pandas==0.25.3
