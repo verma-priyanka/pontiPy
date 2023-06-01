@@ -53,8 +53,8 @@ df = pd.read_csv('sample.csv', index_col = 0)
 
 ### Further Information & Contact
 - **Library Information:**  
-Priyanka Verma, prverma@clarku.edu    
-Priscilla Ahn, pahn@clarku.edu   
+Priyanka Verma, prverma@mail.mcgill.ca    
+Priscilla Ahn, ahnpriscilla@gmail.com  
 
 - **Metric Methodolgy:**  
 Robert (Gil) Pontius, rpontius@clarku.edu  
