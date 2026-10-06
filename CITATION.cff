@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Ahn"
+    given-names: "P."
+  - family-names: "Verma"
+    given-names: "Priyanka"
+    orcid: "https://orcid.org/0000-0002-2199-4994"
+title: "pontiPy: Python package for categorical map comparison"
+version: 1.0.0
+date-released: 2021-10-01
+url: "https://github.com/verma-priyanka/pontiPy"
